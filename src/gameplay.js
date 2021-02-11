@@ -32,22 +32,21 @@ class Gameplay {
 
     static addColor(space) {
         const colorList = {
-            "I": "i-block",
-            "O": "o-block",
-            "T": "t-block",
-            "S": "s-block",
-            "Z": "z-block",
-            "J": "j-block",
-            "L": "l-block",
+            "I-active": "i-block",
+            "O-active": "o-block",
+            "T-active": "t-block",
+            "S-active": "s-block",
+            "Z-active": "z-block",
+            "J-active": "j-block",
+            "L-active": "l-block",
         }
         return colorList[space]
     }
 
     static handleArrowKey(key) {
-        console.log(key)
         switch (key) {
             case "ArrowLeft":
-                console.log("Left Case");
+                Gameplay.moveLeft()
                 break
             case "ArrowRight":
                 console.log("Right Case");
@@ -59,4 +58,41 @@ class Gameplay {
                 console.log("Space Case");
         }
     }
+
+    static moveLeft() {
+        let activeBlocks = Gameplay.findActiveBlocks()
+        let row = Gameplay.gameBoard[`${Object.keys(activeBlocks)[0]}`]
+        let key = Object.keys(activeBlocks)[0]
+        let firstIndex = activeBlocks[key][0]
+        if (firstIndex === 0) {
+            return
+        }
+        let lastIndex = activeBlocks[key].slice(-1)
+        row[firstIndex - 1] = "I-active"
+        row[lastIndex] = null
+        Gameplay.populateBoard()
+    }
+
+    static findActiveBlocks() {
+        let activeBlocks = {}
+        for (const row in Gameplay.gameBoard) {
+            if (Gameplay.gameBoard[`${row}`].some((item) => item != null)) {
+                Gameplay.gameBoard[`${row}`].forEach((value, index) => {
+                if (value == "I-active") {
+                    if (activeBlocks[`${row}`]) {
+                        activeBlocks[`${row}`].push(index)
+                    } else {
+                        activeBlocks[`${row}`] = [index]
+                    }
+                }
+                })
+            }
+        }
+        return activeBlocks
+    }
 }
+
+
+Gameplay.gameBoard[`${Object.keys(activeBlocks)[0]}`]
+
+activeBlocks[`${row}`]
