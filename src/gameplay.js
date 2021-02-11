@@ -43,8 +43,20 @@ class Gameplay {
         return colorList[space]
     }
 
-    static handleArrowKey(event) {
-        console.log("key")
-        console.log(event)
+    static handleArrowKey(key) {
+        console.log(key)
+        switch (key) {
+            case "ArrowLeft":
+                console.log("Left Case");
+                break
+            case "ArrowRight":
+                console.log("Right Case");
+                break
+            case "ArrowDown":
+                console.log("Down Case");
+                break
+            case " ":
+                console.log("Space Case");
+        }
     }
 }
