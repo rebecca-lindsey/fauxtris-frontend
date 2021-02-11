@@ -49,7 +49,7 @@ class Gameplay {
                 Gameplay.moveActivePiece("left")
                 break
             case "ArrowRight":
-                console.log("Right Case");
+                Gameplay.moveActivePiece("right")
                 break
             case "ArrowDown":
                 console.log("Down Case");
@@ -57,6 +57,7 @@ class Gameplay {
             case " ":
                 console.log("Space Case");
         }
+
     }
 
     static moveActivePiece(direction) {
@@ -64,9 +65,11 @@ class Gameplay {
         let row = Gameplay.gameBoard[`${Object.keys(activeBlocks)[0]}`]
         let key = Object.keys(activeBlocks)[0]
         let firstIndex = activeBlocks[key][0]
-        let lastIndex = activeBlocks[key].slice(-1)
+        let lastIndex = activeBlocks[key].slice(-1)[0]
         if (direction == "left" && firstIndex != 0) {
             this.moveLeft(row, firstIndex, lastIndex)
+        } else if (direction == "right" && lastIndex != 9) {
+            this.moveRight(row, firstIndex, lastIndex)
         }
     }
 
@@ -76,7 +79,11 @@ class Gameplay {
         Gameplay.populateBoard()
     }
 
-
+    static moveRight(row, firstIndex, lastIndex) {
+        row[lastIndex + 1] = "I-active"
+        row[firstIndex] = null
+        Gameplay.populateBoard()
+    }
 
     static findActiveBlocks() {
         let activeBlocks = {}
