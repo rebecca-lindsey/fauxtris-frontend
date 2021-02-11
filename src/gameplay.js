@@ -46,7 +46,7 @@ class Gameplay {
     static handleArrowKey(key) {
         switch (key) {
             case "ArrowLeft":
-                Gameplay.moveLeft()
+                Gameplay.moveActivePiece("left")
                 break
             case "ArrowRight":
                 console.log("Right Case");
@@ -59,19 +59,24 @@ class Gameplay {
         }
     }
 
-    static moveLeft() {
+    static moveActivePiece(direction) {
         let activeBlocks = Gameplay.findActiveBlocks()
         let row = Gameplay.gameBoard[`${Object.keys(activeBlocks)[0]}`]
         let key = Object.keys(activeBlocks)[0]
         let firstIndex = activeBlocks[key][0]
-        if (firstIndex === 0) {
-            return
-        }
         let lastIndex = activeBlocks[key].slice(-1)
+        if (direction == "left" && firstIndex != 0) {
+            this.moveLeft(row, firstIndex, lastIndex)
+        }
+    }
+
+    static moveLeft(row, firstIndex, lastIndex) {
         row[firstIndex - 1] = "I-active"
         row[lastIndex] = null
         Gameplay.populateBoard()
     }
+
+
 
     static findActiveBlocks() {
         let activeBlocks = {}
@@ -91,8 +96,3 @@ class Gameplay {
         return activeBlocks
     }
 }
-
-
-Gameplay.gameBoard[`${Object.keys(activeBlocks)[0]}`]
-
-activeBlocks[`${row}`]
