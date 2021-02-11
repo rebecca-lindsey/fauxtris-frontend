@@ -42,4 +42,9 @@ class Gameplay {
         }
         return colorList[space]
     }
+
+    static handleArrowKey(event) {
+        console.log("key")
+        console.log(event)
+    }
 }
