@@ -13,9 +13,23 @@ function populateBoard(board) {
             const newSpace = document.createElement("div")
             newSpace.classList.add("game-space")
             if (space != null) {
-                // run new function here
+                newSpace.classList.add(addColor(space))
+                console.log(addColor(space))
             }
                 document.getElementById("game-display").append(newSpace)
         }
     }
+}
+
+function addColor(space) {
+    const colorList = {
+        "I": "i-block",
+        "O": "o-block",
+        "T": "t-block",
+        "S": "s-block",
+        "Z": "z-block",
+        "J": "j-block",
+        "L": "l-block",
+    }
+    return colorList[space]
 }
