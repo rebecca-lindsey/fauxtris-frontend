@@ -17,6 +17,12 @@ body {
     background-color: #3C6E71;
 }
 
+.game-space {
+    outline: solid .5px #7A7A7A;
+    width: 25px;
+    height: 25px;
+}
+
 .i-block {
     width: 100px;
     height: 25px;
@@ -59,5 +65,7 @@ body {
     background-color: #353535;
     width: 250px;
     height: 500px;
-    border: 2px solid black;
+    border: 5px solid black;
+    display: flex;
+    flex-wrap: wrap;
 }
