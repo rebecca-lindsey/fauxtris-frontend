@@ -52,7 +52,7 @@ class Gameplay {
                 Gameplay.moveActivePiece("right")
                 break
             case "ArrowDown":
-                console.log("Down Case");
+                Gameplay.moveActivePiece("down")
                 break
             case " ":
                 console.log("Space Case");
@@ -70,6 +70,8 @@ class Gameplay {
             this.moveLeft(row, firstIndex, lastIndex)
         } else if (direction == "right" && lastIndex != 9) {
             this.moveRight(row, firstIndex, lastIndex)
+        } else if (direction == "down" && key != "aRow") {
+            this.moveDown(key, row, firstIndex, lastIndex)
         }
     }
 
@@ -85,16 +87,25 @@ class Gameplay {
         Gameplay.populateBoard()
     }
 
+    static moveDown(key, row, firstIndex, lastIndex) {
+        let newLetter = `${String.fromCharCode(key.charCodeAt(0) - 1)}Row`
+        for (let i = firstIndex; i <= lastIndex; i++) {
+            row[i] = null
+            Gameplay.gameBoard[newLetter][i] = "I-active"
+        }
+        Gameplay.populateBoard()
+    }
+
     static findActiveBlocks() {
         let activeBlocks = {}
         for (const row in Gameplay.gameBoard) {
-            if (Gameplay.gameBoard[`${row}`].some((item) => item != null)) {
-                Gameplay.gameBoard[`${row}`].forEach((value, index) => {
+            if (Gameplay.gameBoard[row].some((item) => item != null)) {
+                Gameplay.gameBoard[row].forEach((value, index) => {
                 if (value == "I-active") {
-                    if (activeBlocks[`${row}`]) {
-                        activeBlocks[`${row}`].push(index)
+                    if (activeBlocks[row]) {
+                        activeBlocks[row].push(index)
                     } else {
-                        activeBlocks[`${row}`] = [index]
+                        activeBlocks[row] = [index]
                     }
                 }
                 })
