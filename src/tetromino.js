@@ -20,11 +20,11 @@ class iBlock extends Tetromino {
     Gameplay.populateBoard();
   }
 
-  rotate(activeBlocks, key, firstIndex, lastIndex) {
+  rotate(board, activeBlocks, keys) {
     if (this.orientation == "first") {
-      this.rotateFirst(activeBlocks, key, firstIndex, lastIndex);
+      this.rotateFirst(board, activeBlocks, keys);
     } else if (this.orientation == "second") {
-      this.rotateSecond(activeBlocks, firstIndex, lastIndex);
+      this.rotateSecond(board, activeBlocks, keys);
     }
     Gameplay.populateBoard();
   }

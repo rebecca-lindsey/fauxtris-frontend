@@ -69,7 +69,7 @@ class Gameplay {
     } else if (direction == "down") {
       this.moveDown(board, activeBlocks, keys);
     } else if (direction == "rotate") {
-      Tetromino.activeBlock.rotate(activeBlocks, key, firstIndex, lastIndex);
+      Tetromino.activeBlock.rotate(board, activeBlocks, keys);
     }
   }
 
