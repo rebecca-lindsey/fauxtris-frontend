@@ -71,7 +71,13 @@ class Gameplay {
     } else if (direction == "down" && key != "aRow") {
       this.moveDown(key, row, firstIndex, lastIndex);
     } else if (direction == "rotate") {
-      this.rotateBlock(activeBlocks, row, key, firstIndex, lastIndex);
+      Tetromino.activeBlock.rotate(
+        activeBlocks,
+        row,
+        key,
+        firstIndex,
+        lastIndex
+      );
     }
   }
 
@@ -96,17 +102,17 @@ class Gameplay {
     Gameplay.populateBoard();
   }
 
-  static rotateBlock(activeBlocks, row, key, firstIndex, lastIndex) {
-    let j = 2;
-    for (let i = firstIndex; i <= lastIndex; i++) {
-      let newLetter = `${String.fromCharCode(key.charCodeAt(0) + j)}Row`;
-      let newSpace = activeBlocks[key][0] + 2;
-      row[i] = null;
-      Gameplay.gameBoard[newLetter][newSpace] = "iBlock";
-      Gameplay.populateBoard();
-      j -= 1;
-    }
-  }
+  //   static rotateBlock(activeBlocks, row, key, firstIndex, lastIndex) {
+  //     let j = 2;
+  //     for (let i = firstIndex; i <= lastIndex; i++) {
+  //       let newLetter = `${String.fromCharCode(key.charCodeAt(0) + j)}Row`;
+  //       let newSpace = activeBlocks[key][0] + 2;
+  //       row[i] = null;
+  //       Gameplay.gameBoard[newLetter][newSpace] = "iBlock";
+  //       Gameplay.populateBoard();
+  //       j -= 1;
+  //     }
+  //   }
 
   static findActiveBlocks() {
     let activeBlocks = {};
