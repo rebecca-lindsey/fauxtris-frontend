@@ -66,8 +66,8 @@ class Gameplay {
       this.moveLeft(board, activeBlocks, keys);
     } else if (direction == "right") {
       this.moveRight(board, activeBlocks, keys);
-    } else if (direction == "down" && key != "aRow") {
-      this.moveDown(key, row, firstIndex, lastIndex);
+    } else if (direction == "down") {
+      this.moveDown(board, activeBlocks, keys);
     } else if (direction == "rotate") {
       //   Tetromino.activeBlock.rotate(activeBlocks, key, firstIndex, lastIndex);
     }
@@ -93,12 +93,14 @@ class Gameplay {
     Gameplay.populateBoard();
   }
 
-  static moveDown(key, row, firstIndex, lastIndex) {
-    let newLetter = `${String.fromCharCode(key.charCodeAt(0) - 1)}Row`;
-    for (let i = firstIndex; i <= lastIndex; i++) {
-      row[i] = null;
-      Gameplay.gameBoard[newLetter][i] = Tetromino.activeBlock.constructor.name;
-    }
+  static moveDown(board, activeBlocks, keys) {
+    let newLetter = `${String.fromCharCode(
+      keys[0].charCodeAt(0) - keys.length
+    )}Row`;
+    activeBlocks[keys[0]].forEach((index) => {
+      board[keys[0]][index] = null;
+      board[newLetter][index] = Tetromino.activeBlock.constructor.name;
+    });
     Gameplay.populateBoard();
   }
 
