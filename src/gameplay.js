@@ -68,7 +68,10 @@ class Gameplay {
       this.moveRight(board, activeBlocks, keys);
     } else if (direction == "down") {
       this.moveDown(board, activeBlocks, keys);
-    } else if (direction == "rotate") {
+    } else if (
+      direction == "rotate" &&
+      Tetromino.activeBlock.constructor.name != "oBlock"
+    ) {
       Tetromino.activeBlock.rotate(board, activeBlocks, keys);
     }
   }
