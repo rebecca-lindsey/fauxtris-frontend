@@ -29,14 +29,15 @@ class iBlock extends Tetromino {
     Gameplay.populateBoard();
   }
 
-  rotateFirst(activeBlocks, key, firstIndex, lastIndex) {
+  rotateFirst(board, activeBlocks, keys) {
     let alphaIncrementor = 2;
-    let row = Gameplay.gameBoard[Object.keys(activeBlocks)];
-    let newSpace = activeBlocks[key][0] + 2;
-
+    let row = board[keys];
+    let newSpace = activeBlocks[keys][2];
+    let firstIndex = activeBlocks[keys][0];
+    let lastIndex = activeBlocks[keys].slice(-1)[0];
     for (let i = firstIndex; i <= lastIndex; i++) {
       let newLetter = `${String.fromCharCode(
-        key.charCodeAt(0) + alphaIncrementor
+        keys[0].charCodeAt(0) + alphaIncrementor
       )}Row`;
       row[i] = null;
       Gameplay.gameBoard[newLetter][newSpace] = "iBlock";
