@@ -61,13 +61,10 @@ class Gameplay {
   static moveActivePiece(direction) {
     let activeBlocks = Gameplay.findActiveBlocks();
     let keys = Object.keys(activeBlocks);
-    // let row = Gameplay.gameBoard[key];
-    // let firstIndex = activeBlocks[key][0];
-    // let lastIndex = activeBlocks[key].slice(-1)[0];
     if (direction == "left") {
       this.moveLeft(activeBlocks, keys);
-    } else if (direction == "right" && lastIndex != 9) {
-      this.moveRight(row, firstIndex, lastIndex);
+    } else if (direction == "right") {
+      this.moveRight(activeBlocks, keys);
     } else if (direction == "down" && key != "aRow") {
       this.moveDown(key, row, firstIndex, lastIndex);
     } else if (direction == "rotate") {
@@ -76,19 +73,24 @@ class Gameplay {
   }
 
   static moveLeft(activeBlocks, keys) {
+    let board = Gameplay.gameBoard;
     keys.forEach((row) => {
       let firstIndex = activeBlocks[row][0];
       let lastIndex = activeBlocks[row].slice(-1)[0];
-      Gameplay.gameBoard[row][firstIndex - 1] =
-        Tetromino.activeBlock.constructor.name;
-      Gameplay.gameBoard[row][lastIndex] = null;
+      board[row][firstIndex - 1] = Tetromino.activeBlock.constructor.name;
+      board[row][lastIndex] = null;
     });
     Gameplay.populateBoard();
   }
 
-  static moveRight(row, firstIndex, lastIndex) {
-    row[lastIndex + 1] = Tetromino.activeBlock.constructor.name;
-    row[firstIndex] = null;
+  static moveRight(activeBlocks, keys) {
+    let board = Gameplay.gameBoard;
+    keys.forEach((row) => {
+      let firstIndex = activeBlocks[row][0];
+      let lastIndex = activeBlocks[row].slice(-1)[0];
+      board[row][lastIndex + 1] = Tetromino.activeBlock.constructor.name;
+      board[row][firstIndex] = null;
+    });
     Gameplay.populateBoard();
   }
 
