@@ -24,7 +24,7 @@ class iBlock extends Tetromino {
 
     populateIBlock() {
         for (let i = 3; i < 7; i++) {
-            Gameplay.gameBoard["tRow"][i] = "I-active"
+            Gameplay.gameBoard["tRow"][i] = "iBlock"
         }
         Gameplay.populateBoard()
     }

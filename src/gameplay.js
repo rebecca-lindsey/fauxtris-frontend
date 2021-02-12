@@ -32,13 +32,13 @@ class Gameplay {
 
     static addColor(space) {
         const colorList = {
-            "I-active": "i-block",
-            "O-active": "o-block",
-            "T-active": "t-block",
-            "S-active": "s-block",
-            "Z-active": "z-block",
-            "J-active": "j-block",
-            "L-active": "l-block",
+            "iBlock": "i-block",
+            "oBlock": "o-block",
+            "tBlock": "t-block",
+            "sBlock": "s-block",
+            "zBlock": "z-block",
+            "jBlock": "j-block",
+            "lBlock": "l-block",
         }
         return colorList[space]
     }
@@ -76,13 +76,13 @@ class Gameplay {
     }
 
     static moveLeft(row, firstIndex, lastIndex) {
-        row[firstIndex - 1] = "I-active"
+        row[firstIndex - 1] = Tetromino.activeBlock.constructor.name
         row[lastIndex] = null
         Gameplay.populateBoard()
     }
 
     static moveRight(row, firstIndex, lastIndex) {
-        row[lastIndex + 1] = "I-active"
+        row[lastIndex + 1] = Tetromino.activeBlock.constructor.name
         row[firstIndex] = null
         Gameplay.populateBoard()
     }
@@ -91,7 +91,7 @@ class Gameplay {
         let newLetter = `${String.fromCharCode(key.charCodeAt(0) - 1)}Row`
         for (let i = firstIndex; i <= lastIndex; i++) {
             row[i] = null
-            Gameplay.gameBoard[newLetter][i] = "I-active"
+            Gameplay.gameBoard[newLetter][i] = Tetromino.activeBlock.constructor.name
         }
         Gameplay.populateBoard()
     }
@@ -101,7 +101,7 @@ class Gameplay {
         for (const row in Gameplay.gameBoard) {
             if (Gameplay.gameBoard[row].some((item) => item != null)) {
                 Gameplay.gameBoard[row].forEach((value, index) => {
-                if (value == "I-active") {
+                if (value == Tetromino.activeBlock.constructor.name) {
                     if (activeBlocks[row]) {
                         activeBlocks[row].push(index)
                     } else {
