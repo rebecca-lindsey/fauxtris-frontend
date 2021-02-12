@@ -20,34 +20,39 @@ class iBlock extends Tetromino {
     Gameplay.populateBoard();
   }
 
-  rotate(activeBlocks, row, key, firstIndex, lastIndex) {
+  rotate(activeBlocks, key, firstIndex, lastIndex) {
     if (this.orientation == "first") {
-      this.rotateFirst(activeBlocks, row, key, firstIndex, lastIndex);
+      this.rotateFirst(activeBlocks, key, firstIndex, lastIndex);
     } else if (this.orientation == "second") {
-      this.rotateSecond(activeBlocks, row, key, firstIndex, lastIndex);
+      this.rotateSecond(activeBlocks, firstIndex, lastIndex);
     }
     Gameplay.populateBoard();
   }
 
-  rotateFirst(activeBlocks, row, key, firstIndex, lastIndex) {
-    let j = 2;
+  rotateFirst(activeBlocks, key, firstIndex, lastIndex) {
+    let alphaIncrementor = 2;
+    let row = Gameplay.gameBoard[Object.keys(activeBlocks)];
+    let newSpace = activeBlocks[key][0] + 2;
+
     for (let i = firstIndex; i <= lastIndex; i++) {
-      let newLetter = `${String.fromCharCode(key.charCodeAt(0) + j)}Row`;
-      let newSpace = activeBlocks[key][0] + 2;
+      let newLetter = `${String.fromCharCode(
+        key.charCodeAt(0) + alphaIncrementor
+      )}Row`;
       row[i] = null;
       Gameplay.gameBoard[newLetter][newSpace] = "iBlock";
-      j -= 1;
+      alphaIncrementor -= 1;
     }
+
     this.orientation = "second";
   }
 
-  rotateSecond(activeBlocks, row, key, firstIndex, lastIndex) {
+  rotateSecond(activeBlocks, firstIndex, lastIndex) {
     let newLetter = Object.keys(activeBlocks)[2];
     for (const row in activeBlocks) {
-      Gameplay.gameBoard[row][activeBlocks[row][0]] = null;
+      let index = activeBlocks[row][0];
+      Gameplay.gameBoard[row][index] = null;
     }
     for (let i = firstIndex - 2; i <= lastIndex + 1; i++) {
-      activeBlocks[key][firstIndex] = null;
       Gameplay.gameBoard[newLetter][i] = "iBlock";
     }
     this.orientation = "first";

@@ -60,8 +60,8 @@ class Gameplay {
 
   static moveActivePiece(direction) {
     let activeBlocks = Gameplay.findActiveBlocks();
-    let row = Gameplay.gameBoard[`${Object.keys(activeBlocks)[0]}`];
     let key = Object.keys(activeBlocks)[0];
+    let row = Gameplay.gameBoard[key];
     let firstIndex = activeBlocks[key][0];
     let lastIndex = activeBlocks[key].slice(-1)[0];
     if (direction == "left" && firstIndex != 0) {
@@ -71,13 +71,7 @@ class Gameplay {
     } else if (direction == "down" && key != "aRow") {
       this.moveDown(key, row, firstIndex, lastIndex);
     } else if (direction == "rotate") {
-      Tetromino.activeBlock.rotate(
-        activeBlocks,
-        row,
-        key,
-        firstIndex,
-        lastIndex
-      );
+      Tetromino.activeBlock.rotate(activeBlocks, key, firstIndex, lastIndex);
     }
   }
 
