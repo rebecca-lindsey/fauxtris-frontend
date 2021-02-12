@@ -59,12 +59,13 @@ class Gameplay {
   }
 
   static moveActivePiece(direction) {
+    let board = Gameplay.gameBoard;
     let activeBlocks = Gameplay.findActiveBlocks();
     let keys = Object.keys(activeBlocks);
     if (direction == "left") {
-      this.moveLeft(activeBlocks, keys);
+      this.moveLeft(board, activeBlocks, keys);
     } else if (direction == "right") {
-      this.moveRight(activeBlocks, keys);
+      this.moveRight(board, activeBlocks, keys);
     } else if (direction == "down" && key != "aRow") {
       this.moveDown(key, row, firstIndex, lastIndex);
     } else if (direction == "rotate") {
@@ -72,8 +73,7 @@ class Gameplay {
     }
   }
 
-  static moveLeft(activeBlocks, keys) {
-    let board = Gameplay.gameBoard;
+  static moveLeft(board, activeBlocks, keys) {
     keys.forEach((row) => {
       let firstIndex = activeBlocks[row][0];
       let lastIndex = activeBlocks[row].slice(-1)[0];
@@ -83,8 +83,7 @@ class Gameplay {
     Gameplay.populateBoard();
   }
 
-  static moveRight(activeBlocks, keys) {
-    let board = Gameplay.gameBoard;
+  static moveRight(board, activeBlocks, keys) {
     keys.forEach((row) => {
       let firstIndex = activeBlocks[row][0];
       let lastIndex = activeBlocks[row].slice(-1)[0];
