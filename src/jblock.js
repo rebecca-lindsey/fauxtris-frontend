@@ -1,4 +1,4 @@
-class jBlock extends Tetromino {
+class jBlock extends FourRotation {
   constructor(orientation) {
     super(orientation);
     this.active = true;
@@ -14,24 +14,24 @@ class jBlock extends Tetromino {
     Gameplay.populateBoard();
   }
 
-  rotate(board, activeBlocks, keys) {
-    switch (this.orientation) {
-      case "first":
-        this.rotateFirst(board, activeBlocks, keys);
-        break;
-      case "second":
-        this.rotateSecond(board, activeBlocks, keys);
-        break;
-      case "third":
-        this.rotateThird(board, activeBlocks, keys);
-        break;
-      case "fourth":
-        this.rotateFourth(board, activeBlocks, keys);
-        break;
-    }
+  //   rotate(board, activeBlocks, keys) {
+  //     switch (this.orientation) {
+  //       case "first":
+  //         this.rotateFirst(board, activeBlocks, keys);
+  //         break;
+  //       case "second":
+  //         this.rotateSecond(board, activeBlocks, keys);
+  //         break;
+  //       case "third":
+  //         this.rotateThird(board, activeBlocks, keys);
+  //         break;
+  //       case "fourth":
+  //         this.rotateFourth(board, activeBlocks, keys);
+  //         break;
+  //     }
 
-    Gameplay.populateBoard();
-  }
+  //     Gameplay.populateBoard();
+  //   }
 
   rotateFirst(board, activeBlocks, keys) {
     const topRow = Tetromino.nextLetterRowUpwards(keys[0]);

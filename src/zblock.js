@@ -1,4 +1,4 @@
-class zBlock extends Tetromino {
+class zBlock extends TwoRotation {
   constructor(orientation) {
     super(orientation);
     this.active = true;

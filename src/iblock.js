@@ -1,4 +1,4 @@
-class iBlock extends Tetromino {
+class iBlock extends TwoRotation {
   constructor(orientation) {
     super(orientation);
     this.active = true;
@@ -13,17 +13,19 @@ class iBlock extends Tetromino {
     Gameplay.populateBoard();
   }
 
-  rotate(board, activeBlocks, keys) {
-    const firstIndex = activeBlocks[keys[0]][0];
-    if (this.orientation == "first") {
-      this.rotateFirst(board, activeBlocks, keys[0], firstIndex);
-    } else if (this.orientation == "second") {
-      this.rotateSecond(board, activeBlocks, keys, firstIndex);
-    }
-    Gameplay.populateBoard();
-  }
+  // rotate(board, activeBlocks, keys) {
+  //   const firstIndex = activeBlocks[keys[0]][0];
+  //   if (this.orientation == "first") {
+  //     this.rotateFirst(board, activeBlocks, keys[0], firstIndex);
+  //   } else if (this.orientation == "second") {
+  //     this.rotateSecond(board, activeBlocks, keys, firstIndex);
+  //   }
+  //   Gameplay.populateBoard();
+  // }
 
-  rotateFirst(board, activeBlocks, currentRowName, firstIndex) {
+  rotateFirst(board, activeBlocks, keys) {
+    const currentRowName = keys[0];
+    const firstIndex = activeBlocks[currentRowName][0];
     const lastIndex = activeBlocks[currentRowName].slice(-1)[0];
     const row = board[currentRowName];
     const verticalIndex = activeBlocks[currentRowName][2];
@@ -40,7 +42,8 @@ class iBlock extends Tetromino {
     this.orientation = "second";
   }
 
-  rotateSecond(board, activeBlocks, keys, originalIndex) {
+  rotateSecond(board, activeBlocks, keys) {
+    const originalIndex = activeBlocks[keys[0]][0];
     const newRowName = keys[2];
     for (const row in activeBlocks) {
       const index = activeBlocks[row][0];
