@@ -14,39 +14,41 @@ class iBlock extends Tetromino {
   }
 
   rotate(board, activeBlocks, keys) {
-    let firstIndex = activeBlocks[keys[0]][0];
-    let lastIndex = activeBlocks[keys[0]].slice(-1)[0];
+    const firstIndex = activeBlocks[keys[0]][0];
     if (this.orientation == "first") {
-      this.rotateFirst(board, activeBlocks, keys, firstIndex, lastIndex);
+      this.rotateFirst(board, activeBlocks, keys, firstIndex);
     } else if (this.orientation == "second") {
-      this.rotateSecond(board, activeBlocks, keys, firstIndex, lastIndex);
+      this.rotateSecond(board, activeBlocks, keys, firstIndex);
     }
     Gameplay.populateBoard();
   }
 
-  rotateFirst(board, activeBlocks, keys, firstIndex, lastIndex) {
+  rotateFirst(board, activeBlocks, keys, firstIndex) {
+    const currentRowName = keys[0];
+    const lastIndex = activeBlocks[currentRowName].slice(-1)[0];
+    const row = board[currentRowName];
+    const verticalIndex = activeBlocks[currentRowName][2];
     let alphaIncrementor = 2;
-    let row = board[keys];
-    let newSpace = activeBlocks[keys][2];
+
     for (let i = firstIndex; i <= lastIndex; i++) {
-      let newLetter = `${String.fromCharCode(
+      const newRowName = `${String.fromCharCode(
         keys[0].charCodeAt(0) + alphaIncrementor
       )}Row`;
       row[i] = null;
-      Gameplay.gameBoard[newLetter][newSpace] = "iBlock";
+      Gameplay.gameBoard[newRowName][verticalIndex] = "iBlock";
       alphaIncrementor -= 1;
     }
     this.orientation = "second";
   }
 
-  rotateSecond(board, activeBlocks, keys, firstIndex, lastIndex) {
-    let newLetter = keys[2];
+  rotateSecond(board, activeBlocks, keys, originalIndex) {
+    const newRowName = keys[2];
     for (const row in activeBlocks) {
-      let index = activeBlocks[row][0];
+      const index = activeBlocks[row][0];
       board[row][index] = null;
     }
-    for (let i = firstIndex - 2; i <= lastIndex + 1; i++) {
-      board[newLetter][i] = "iBlock";
+    for (let i = originalIndex - 2; i <= originalIndex + 1; i++) {
+      board[newRowName][i] = "iBlock";
     }
     this.orientation = "first";
   }
