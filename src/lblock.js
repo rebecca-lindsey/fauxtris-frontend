@@ -46,20 +46,19 @@ class lBlock extends Tetromino {
   }
 
   rotateSecond(board, activeBlocks, keys) {
-    // const topRow = keys[0];
-    // const centerRow = keys[1];
-    // const bottomRow = keys[2];
+    const topRow = keys[0];
+    const centerRow = keys[1];
+    const bottomRow = keys[2];
+    const leftIndex = activeBlocks[topRow][0];
+    const currentRightIndex = activeBlocks[topRow][1];
+    const futureRightIndex = currentRightIndex + 1;
 
-    // const furthestLeftIndex = activeBlocks[bottomRow][0];
-    // const bottomRightIndex = activeBlocks[bottomRow][1];
-    // const topIndex = activeBlocks[topRow][0];
-
-    // board[bottomRow][furthestLeftIndex] = null;
-    // board[topRow][furthestLeftIndex] = "jBlock";
-    // board[bottomRow][bottomRightIndex] = null;
-    // board[centerRow][bottomRightIndex - 1] = "jBlock";
-    // board[topRow][topIndex] = null;
-    // board[centerRow][topIndex + 1] = "jBlock";
+    board[topRow][leftIndex] = null;
+    board[centerRow][leftIndex] = "lBlock";
+    board[topRow][currentRightIndex] = null;
+    board[topRow][futureRightIndex] = "lBlock";
+    board[bottomRow][currentRightIndex] = null;
+    board[centerRow][futureRightIndex] = "lBlock";
 
     this.orientation = "third";
   }
