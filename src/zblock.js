@@ -24,15 +24,6 @@ class zBlock extends TwoRotation {
     Gameplay.populateBoard();
   }
 
-  rotate(board, activeBlocks, keys) {
-    if (this.orientation == "first") {
-      this.rotateFirst(board, activeBlocks, keys);
-    } else if (this.orientation == "second") {
-      this.rotateSecond(board, activeBlocks, keys);
-    }
-    Gameplay.populateBoard();
-  }
-
   rotateFirst(board, activeBlocks, keys) {
     const furthestRightBlockCurrentIndex = activeBlocks[keys[1]][1];
     const newTopRow = Tetromino.nextLetterRowUpwards(keys[0]);

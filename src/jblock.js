@@ -14,25 +14,6 @@ class jBlock extends FourRotation {
     Gameplay.populateBoard();
   }
 
-  //   rotate(board, activeBlocks, keys) {
-  //     switch (this.orientation) {
-  //       case "first":
-  //         this.rotateFirst(board, activeBlocks, keys);
-  //         break;
-  //       case "second":
-  //         this.rotateSecond(board, activeBlocks, keys);
-  //         break;
-  //       case "third":
-  //         this.rotateThird(board, activeBlocks, keys);
-  //         break;
-  //       case "fourth":
-  //         this.rotateFourth(board, activeBlocks, keys);
-  //         break;
-  //     }
-
-  //     Gameplay.populateBoard();
-  //   }
-
   rotateFirst(board, activeBlocks, keys) {
     const topRow = Tetromino.nextLetterRowUpwards(keys[0]);
     const centerRow = keys[0];

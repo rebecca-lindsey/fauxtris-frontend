@@ -13,16 +13,6 @@ class iBlock extends TwoRotation {
     Gameplay.populateBoard();
   }
 
-  // rotate(board, activeBlocks, keys) {
-  //   const firstIndex = activeBlocks[keys[0]][0];
-  //   if (this.orientation == "first") {
-  //     this.rotateFirst(board, activeBlocks, keys[0], firstIndex);
-  //   } else if (this.orientation == "second") {
-  //     this.rotateSecond(board, activeBlocks, keys, firstIndex);
-  //   }
-  //   Gameplay.populateBoard();
-  // }
-
   rotateFirst(board, activeBlocks, keys) {
     const currentRowName = keys[0];
     const firstIndex = activeBlocks[currentRowName][0];

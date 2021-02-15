@@ -24,15 +24,6 @@ class sBlock extends TwoRotation {
     Gameplay.populateBoard();
   }
 
-  //   rotate(board, activeBlocks, keys) {
-  //     if (this.orientation == "first") {
-  //       this.rotateFirst(board, activeBlocks, keys);
-  //     } else if (this.orientation == "second") {
-  //       this.rotateSecond(board, activeBlocks, keys);
-  //     }
-  //     Gameplay.populateBoard();
-  //   }
-
   rotateFirst(board, activeBlocks, keys) {
     let furthestLeftBlockCurrentIndex = activeBlocks[keys[1]][0];
     let furthestLeftBlockNewIndex = furthestLeftBlockCurrentIndex + 2;
