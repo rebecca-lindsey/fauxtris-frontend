@@ -45,27 +45,57 @@ class jBlock extends Tetromino {
   }
 
   rotateSecond(board, activeBlocks, keys) {
-    // let currentBlockIndex = activeBlocks[keys[2]][0];
-    // let newBlockIndex = activeBlocks[keys[1]][1] + 1;
-    // board[keys[2]][currentBlockIndex] = null;
-    // board[keys[1]][newBlockIndex] = "tBlock";
+    const topRow = keys[0];
+    const centerRow = keys[1];
+    const bottomRow = keys[2];
+
+    const furthestLeftIndex = activeBlocks[bottomRow][0];
+    const bottomRightIndex = activeBlocks[bottomRow][1];
+    const topIndex = activeBlocks[topRow][0];
+
+    board[bottomRow][furthestLeftIndex] = null;
+    board[topRow][furthestLeftIndex] = "jBlock";
+    board[bottomRow][bottomRightIndex] = null;
+    board[centerRow][bottomRightIndex - 1] = "jBlock";
+    board[topRow][topIndex] = null;
+    board[centerRow][topIndex + 1] = "jBlock";
+
     this.orientation = "third";
   }
 
   rotateThird(board, activeBlocks, keys) {
-    // let currentBlockIndex = activeBlocks[keys[1]][0];
-    // let newBlockIndex = currentBlockIndex + 1;
-    // let newRow = Tetromino.nextLetterRowDownwards(keys[1]);
-    // board[keys[1]][currentBlockIndex] = null;
-    // board[newRow][newBlockIndex] = "tBlock";
+    const topRow = keys[0];
+    const centerRow = keys[1];
+    const bottomRow = Tetromino.nextLetterRowDownwards(centerRow);
+    const leftTopIndex = activeBlocks[topRow][0];
+    const leftBottomIndex = activeBlocks[centerRow][0];
+    const furthestRightIndex = activeBlocks[centerRow][2];
+
+    board[topRow][leftTopIndex] = null;
+    board[topRow][leftTopIndex + 1] = "jBlock";
+    board[centerRow][furthestRightIndex] = null;
+    board[topRow][furthestRightIndex] = "jBlock";
+    board[centerRow][leftBottomIndex] = null;
+    board[bottomRow][leftBottomIndex + 1] = "jBlock";
+
     this.orientation = "fourth";
   }
 
   rotateFourth(board, activeBlocks, keys) {
-    // let currentBlockIndex = activeBlocks[keys[0]][0];
-    // let newBlockIndex = currentBlockIndex - 1;
-    // board[keys[0]][currentBlockIndex] = null;
-    // board[keys[1]][newBlockIndex] = "tBlock";
+    const topRow = keys[0];
+    const centerRow = keys[1];
+    const bottomRow = keys[2];
+    const topLeftIndex = activeBlocks[topRow][0];
+    const topRightIndex = activeBlocks[topRow][1];
+    const bottomIndex = activeBlocks[bottomRow][0];
+
+    board[topRow][topLeftIndex] = null;
+    board[centerRow][topLeftIndex - 1] = "jBlock";
+    board[topRow][topRightIndex] = null;
+    board[bottomRow][topRightIndex] = "jBlock";
+    board[bottomRow][bottomIndex] = null;
+    board[centerRow][topRightIndex] = "jBlock";
+
     this.orientation = "first";
   }
 }
