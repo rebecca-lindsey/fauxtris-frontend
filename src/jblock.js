@@ -73,16 +73,16 @@ class jBlock extends Tetromino {
     const topRow = keys[0];
     const centerRow = keys[1];
     const bottomRow = Tetromino.nextLetterRowDownwards(centerRow);
-    const leftTopIndex = activeBlocks[topRow][0];
-    const leftBottomIndex = activeBlocks[centerRow][0];
-    const furthestRightIndex = activeBlocks[centerRow][2];
+    const leftIndex = activeBlocks[centerRow][0];
+    const centerIndex = activeBlocks[centerRow][1];
+    const rightIndex = activeBlocks[centerRow][2];
 
-    board[topRow][leftTopIndex] = null;
-    board[topRow][leftTopIndex + 1] = "jBlock";
-    board[centerRow][furthestRightIndex] = null;
-    board[topRow][furthestRightIndex] = "jBlock";
-    board[centerRow][leftBottomIndex] = null;
-    board[bottomRow][leftBottomIndex + 1] = "jBlock";
+    board[topRow][leftIndex] = null;
+    board[topRow][centerIndex] = "jBlock";
+    board[centerRow][rightIndex] = null;
+    board[topRow][rightIndex] = "jBlock";
+    board[centerRow][leftIndex] = null;
+    board[bottomRow][centerIndex] = "jBlock";
 
     this.orientation = "fourth";
   }
