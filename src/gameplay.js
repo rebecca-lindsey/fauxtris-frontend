@@ -18,7 +18,7 @@ class Gameplay {
   static populateBoard() {
     Gameplay.clearBoard();
     for (const row in Gameplay.gameBoard) {
-      for (const space of Gameplay.gameBoard[`${row}`]) {
+      for (const space of Gameplay.gameBoard[row]) {
         const newSpace = document.createElement("div");
         newSpace.classList.add("game-space");
         if (space != null) {
@@ -59,9 +59,9 @@ class Gameplay {
   }
 
   static moveActivePiece(direction) {
-    let board = Gameplay.gameBoard;
-    let activeBlocks = Gameplay.findActiveBlocks();
-    let keys = Object.keys(activeBlocks);
+    const board = Gameplay.gameBoard;
+    const activeBlocks = Gameplay.findActiveBlocks();
+    const keys = Object.keys(activeBlocks);
     if (direction == "left") {
       this.moveLeft(board, activeBlocks, keys);
     } else if (direction == "right") {
@@ -78,8 +78,8 @@ class Gameplay {
 
   static moveLeft(board, activeBlocks, keys) {
     keys.forEach((row) => {
-      let firstIndex = activeBlocks[row][0];
-      let lastIndex = activeBlocks[row].slice(-1)[0];
+      const firstIndex = activeBlocks[row][0];
+      const lastIndex = activeBlocks[row].slice(-1)[0];
       board[row][firstIndex - 1] = Tetromino.activeBlock.constructor.name;
       board[row][lastIndex] = null;
     });
@@ -88,8 +88,8 @@ class Gameplay {
 
   static moveRight(board, activeBlocks, keys) {
     keys.forEach((row) => {
-      let firstIndex = activeBlocks[row][0];
-      let lastIndex = activeBlocks[row].slice(-1)[0];
+      const firstIndex = activeBlocks[row][0];
+      const lastIndex = activeBlocks[row].slice(-1)[0];
       board[row][lastIndex + 1] = Tetromino.activeBlock.constructor.name;
       board[row][firstIndex] = null;
     });
@@ -98,7 +98,7 @@ class Gameplay {
 
   static moveDown(board, activeBlocks, keys) {
     for (let i = keys.length; i > 0; i--) {
-      let newLetter = `${String.fromCharCode(keys[0].charCodeAt(0) - i)}Row`;
+      const newLetter = `${String.fromCharCode(keys[0].charCodeAt(0) - i)}Row`;
       activeBlocks[keys[i - 1]].forEach((index) => {
         board[keys[i - 1]][index] = null;
         board[newLetter][index] = Tetromino.activeBlock.constructor.name;
@@ -108,7 +108,7 @@ class Gameplay {
   }
 
   static findActiveBlocks() {
-    let activeBlocks = {};
+    const activeBlocks = {};
     for (const row in Gameplay.gameBoard) {
       if (Gameplay.gameBoard[row].some((item) => item != null)) {
         Gameplay.gameBoard[row].forEach((value, index) => {
