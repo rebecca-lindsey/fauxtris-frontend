@@ -21,6 +21,8 @@ class tBlock extends Tetromino {
       this.rotateSecond(board, activeBlocks, keys);
     } else if (this.orientation == "third") {
       this.rotateThird(board, activeBlocks, keys);
+    } else if (this.orientation == "fourth") {
+      this.rotateFourth(board, activeBlocks, keys);
     }
     Gameplay.populateBoard();
   }
@@ -48,5 +50,14 @@ class tBlock extends Tetromino {
     let newRow = `${String.fromCharCode(keys[1].charCodeAt(0) - 1)}Row`;
     board[keys[1]][currentBlockIndex] = null;
     board[newRow][newBlockIndex] = "tBlock";
+    this.orientation = "fourth";
+  }
+
+  rotateFourth(board, activeBlocks, keys) {
+    let currentBlockIndex = activeBlocks[keys[0]][0];
+    let newBlockIndex = currentBlockIndex - 1;
+    board[keys[0]][currentBlockIndex] = null;
+    board[keys[1]][newBlockIndex] = "tBlock";
+    this.orientation = "first";
   }
 }
