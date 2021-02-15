@@ -15,19 +15,19 @@ class lBlock extends FourRotation {
   }
 
   rotateFirst(board, activeBlocks, keys) {
-    const currentTopRow = keys[0];
+    const centerRow = keys[0];
     const bottomRow = keys[1];
-    const futureTopRow = Tetromino.nextLetterRowUpwards(currentTopRow);
-    const furthestLeftIndex = activeBlocks[currentTopRow][0];
-    const pillarIndex = activeBlocks[currentTopRow][1];
-    const furthestRightIndex = activeBlocks[currentTopRow][2];
+    const topRow = Tetromino.nextLetterRowUpwards(centerRow);
+    const leftIndex = activeBlocks[centerRow][0];
+    const centerIndex = activeBlocks[centerRow][1];
+    const rightIndex = activeBlocks[centerRow][2];
 
-    board[currentTopRow][furthestLeftIndex] = null;
-    board[futureTopRow][furthestLeftIndex] = "lBlock";
-    board[currentTopRow][furthestRightIndex] = null;
-    board[futureTopRow][pillarIndex] = "lBlock";
-    board[bottomRow][furthestLeftIndex] = null;
-    board[bottomRow][pillarIndex] = "lBlock";
+    board[centerRow][leftIndex] = null;
+    board[topRow][leftIndex] = "lBlock";
+    board[centerRow][rightIndex] = null;
+    board[topRow][centerIndex] = "lBlock";
+    board[bottomRow][leftIndex] = null;
+    board[bottomRow][centerIndex] = "lBlock";
 
     this.orientation = "second";
   }
