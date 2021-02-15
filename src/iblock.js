@@ -16,15 +16,14 @@ class iBlock extends Tetromino {
   rotate(board, activeBlocks, keys) {
     const firstIndex = activeBlocks[keys[0]][0];
     if (this.orientation == "first") {
-      this.rotateFirst(board, activeBlocks, keys, firstIndex);
+      this.rotateFirst(board, activeBlocks, keys[0], firstIndex);
     } else if (this.orientation == "second") {
       this.rotateSecond(board, activeBlocks, keys, firstIndex);
     }
     Gameplay.populateBoard();
   }
 
-  rotateFirst(board, activeBlocks, keys, firstIndex) {
-    const currentRowName = keys[0];
+  rotateFirst(board, activeBlocks, currentRowName, firstIndex) {
     const lastIndex = activeBlocks[currentRowName].slice(-1)[0];
     const row = board[currentRowName];
     const verticalIndex = activeBlocks[currentRowName][2];
@@ -32,7 +31,7 @@ class iBlock extends Tetromino {
 
     for (let i = firstIndex; i <= lastIndex; i++) {
       const newRowName = `${String.fromCharCode(
-        keys[0].charCodeAt(0) + alphaIncrementor
+        currentRowName.charCodeAt(0) + alphaIncrementor
       )}Row`;
       row[i] = null;
       Gameplay.gameBoard[newRowName][verticalIndex] = "iBlock";
