@@ -48,14 +48,15 @@ class zBlock extends Tetromino {
   }
 
   rotateSecond(board, activeBlocks, keys) {
-    // let bottomBlockCurrentIndex = activeBlocks[keys[2]][0];
-    // let bottomBlockNewIndex = bottomBlockCurrentIndex - 2;
-    // board[keys[2]][bottomBlockCurrentIndex] = null;
-    // board[keys[2]][bottomBlockNewIndex] = "sBlock";
+    const topBlockIndex = activeBlocks[keys[0]][0];
+    board[keys[2]][topBlockIndex] = "zBlock";
+    board[keys[0]][topBlockIndex] = null;
 
-    // let topBlockCurrentIndex = activeBlocks[keys[0]][0];
-    // board[keys[0]][topBlockCurrentIndex] = null;
-    // board[keys[2]][topBlockCurrentIndex] = "sBlock";
+    const rightCenterBlockCurrentIndex = activeBlocks[keys[1]][1];
+    const rightCenterBlockNewIndex = rightCenterBlockCurrentIndex - 2;
+    board[keys[1]][rightCenterBlockCurrentIndex] = null;
+    board[keys[1]][rightCenterBlockNewIndex] = "zBlock";
+
     this.orientation = "first";
   }
 }
