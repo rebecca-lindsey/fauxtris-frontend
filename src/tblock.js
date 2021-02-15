@@ -30,7 +30,7 @@ class tBlock extends Tetromino {
   rotateFirst(board, activeBlocks, keys) {
     let firstKey = keys[0];
     let rightBlockIndex = activeBlocks[firstKey][2];
-    let newRowName = `${String.fromCharCode(firstKey.charCodeAt(0) + 1)}Row`;
+    let newRowName = Tetromino.nextLetterRowUpwards(firstKey);
     board[firstKey][rightBlockIndex] = null;
     board[newRowName][rightBlockIndex - 1] = "tBlock";
     this.orientation = "second";
@@ -47,7 +47,7 @@ class tBlock extends Tetromino {
   rotateThird(board, activeBlocks, keys) {
     let currentBlockIndex = activeBlocks[keys[1]][0];
     let newBlockIndex = currentBlockIndex + 1;
-    let newRow = `${String.fromCharCode(keys[1].charCodeAt(0) - 1)}Row`;
+    let newRow = Tetromino.nextLetterRowDownwards(keys[1]);
     board[keys[1]][currentBlockIndex] = null;
     board[newRow][newBlockIndex] = "tBlock";
     this.orientation = "fourth";
