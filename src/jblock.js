@@ -34,18 +34,19 @@ class jBlock extends Tetromino {
   }
 
   rotateFirst(board, activeBlocks, keys) {
-    const furthestLeftIndex = activeBlocks[keys[0]][0];
+    const topRow = Tetromino.nextLetterRowUpwards(keys[0]);
+    const centerRow = keys[0];
     const bottomRow = keys[1];
-    const pillarIndex = activeBlocks[keys[0]][1];
-    const rightBottomIndex = activeBlocks[keys[1]][0];
-    const rightTopIndex = activeBlocks[keys[0]][2];
+    const leftIndex = activeBlocks[centerRow][0];
+    const centerIndex = activeBlocks[centerRow][1];
+    const rightIndex = activeBlocks[bottomRow][0];
 
-    board[keys[0]][furthestLeftIndex] = null;
-    board[bottomRow][furthestLeftIndex] = "jBlock";
-    board[bottomRow][rightBottomIndex] = null;
-    board[bottomRow][pillarIndex] = "jBlock";
-    board[keys[0]][rightTopIndex] = null;
-    board[Tetromino.nextLetterRowUpwards(keys[0])][pillarIndex] = "jBlock";
+    board[centerRow][leftIndex] = null;
+    board[bottomRow][leftIndex] = "jBlock";
+    board[bottomRow][rightIndex] = null;
+    board[bottomRow][centerIndex] = "jBlock";
+    board[centerRow][rightIndex] = null;
+    board[topRow][centerIndex] = "jBlock";
 
     this.orientation = "second";
   }
@@ -54,17 +55,16 @@ class jBlock extends Tetromino {
     const topRow = keys[0];
     const centerRow = keys[1];
     const bottomRow = keys[2];
+    const leftIndex = activeBlocks[bottomRow][0];
+    const centerIndex = activeBlocks[bottomRow][1];
+    const rightIndex = centerIndex + 1;
 
-    const furthestLeftIndex = activeBlocks[bottomRow][0];
-    const bottomRightIndex = activeBlocks[bottomRow][1];
-    const topIndex = activeBlocks[topRow][0];
-
-    board[bottomRow][furthestLeftIndex] = null;
-    board[topRow][furthestLeftIndex] = "jBlock";
-    board[bottomRow][bottomRightIndex] = null;
-    board[centerRow][bottomRightIndex - 1] = "jBlock";
-    board[topRow][topIndex] = null;
-    board[centerRow][topIndex + 1] = "jBlock";
+    board[bottomRow][leftIndex] = null;
+    board[topRow][leftIndex] = "jBlock";
+    board[bottomRow][centerIndex] = null;
+    board[centerRow][leftIndex] = "jBlock";
+    board[topRow][centerIndex] = null;
+    board[centerRow][rightIndex] = "jBlock";
 
     this.orientation = "third";
   }
