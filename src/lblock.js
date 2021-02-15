@@ -28,19 +28,19 @@ class lBlock extends Tetromino {
   }
 
   rotateFirst(board, activeBlocks, keys) {
-    debugger;
-    // const furthestLeftIndex = activeBlocks[keys[0]][0];
-    // const bottomRow = keys[1];
-    // const pillarIndex = activeBlocks[keys[0]][1];
-    // const rightBottomIndex = activeBlocks[keys[1]][0];
-    // const rightTopIndex = activeBlocks[keys[0]][2];
+    const currentTopRow = keys[0];
+    const bottomRow = keys[1];
+    const futureTopRow = Tetromino.nextLetterRowUpwards(currentTopRow);
+    const furthestLeftIndex = activeBlocks[currentTopRow][0];
+    const pillarIndex = activeBlocks[currentTopRow][1];
+    const furthestRightIndex = activeBlocks[currentTopRow][2];
 
-    // board[keys[0]][furthestLeftIndex] = null;
-    // board[bottomRow][furthestLeftIndex] = "jBlock";
-    // board[bottomRow][rightBottomIndex] = null;
-    // board[bottomRow][pillarIndex] = "jBlock";
-    // board[keys[0]][rightTopIndex] = null;
-    // board[Tetromino.nextLetterRowUpwards(keys[0])][pillarIndex] = "jBlock";
+    board[currentTopRow][furthestLeftIndex] = null;
+    board[futureTopRow][furthestLeftIndex] = "lBlock";
+    board[currentTopRow][furthestRightIndex] = null;
+    board[futureTopRow][pillarIndex] = "lBlock";
+    board[bottomRow][furthestLeftIndex] = null;
+    board[bottomRow][pillarIndex] = "lBlock";
 
     this.orientation = "second";
   }
