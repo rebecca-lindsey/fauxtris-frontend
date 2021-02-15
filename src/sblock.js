@@ -35,7 +35,18 @@ class sBlock extends Tetromino {
   }
 
   rotateFirst(board, activeBlocks, keys) {
-    debugger;
+    let furthestLeftBlockCurrentIndex = activeBlocks[keys[1]][0];
+    let furthestLeftBlockNewIndex = furthestLeftBlockCurrentIndex + 2;
+    board[keys[1]][furthestLeftBlockCurrentIndex] = null;
+    board[keys[1]][furthestLeftBlockNewIndex] = "sBlock";
+
+    let centerBottomBlockCurrentIndex = activeBlocks[keys[1]][1];
+    board[keys[1]][centerBottomBlockCurrentIndex] = null;
+    board[Tetromino.nextLetterRowUpwards(keys[0])][
+      centerBottomBlockCurrentIndex
+    ] = "sBlock";
+
+    this.orientation = "second";
   }
 
   //   rotateSecond(board, activeBlocks, keys, firstIndex, lastIndex) {
