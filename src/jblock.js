@@ -15,15 +15,21 @@ class jBlock extends Tetromino {
   }
 
   rotate(board, activeBlocks, keys) {
-    if (this.orientation == "first") {
-      this.rotateFirst(board, activeBlocks, keys);
-    } else if (this.orientation == "second") {
-      this.rotateSecond(board, activeBlocks, keys);
-    } else if (this.orientation == "third") {
-      this.rotateThird(board, activeBlocks, keys);
-    } else if (this.orientation == "fourth") {
-      this.rotateFourth(board, activeBlocks, keys);
+    switch (this.orientation) {
+      case "first":
+        this.rotateFirst(board, activeBlocks, keys);
+        break;
+      case "second":
+        this.rotateSecond(board, activeBlocks, keys);
+        break;
+      case "third":
+        this.rotateThird(board, activeBlocks, keys);
+        break;
+      case "fourth":
+        this.rotateFourth(board, activeBlocks, keys);
+        break;
     }
+
     Gameplay.populateBoard();
   }
 
