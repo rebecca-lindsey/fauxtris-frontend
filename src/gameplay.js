@@ -97,16 +97,6 @@ class Gameplay {
   }
 
   static moveDown(board, activeBlocks, keys) {
-    // let newLetter = `${String.fromCharCode(
-    //   keys[0].charCodeAt(0) - keys.length
-    // )}Row`;
-    // console.log("newLetter", newLetter);
-    // activeBlocks[keys[0]].forEach((index) => {
-    //   console.log("index", index);
-    //   board[keys[0]][index] = null;
-    //   board[newLetter][index] = Tetromino.activeBlock.constructor.name;
-    // });
-    // debugger;
     for (let i = keys.length; i > 0; i--) {
       let newLetter = `${String.fromCharCode(keys[0].charCodeAt(0) - i)}Row`;
       activeBlocks[keys[i - 1]].forEach((index) => {

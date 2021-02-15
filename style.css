@@ -1,7 +1,7 @@
 /* Make blocks 25px squares,
     Play field is 10 squares wide, 20 squares tall */
 
-    /* Color Palette:
+/* Color Palette:
     #284B63
     #3C6E71
     #D9D9D9
@@ -9,65 +9,65 @@
     */
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: #3C6E71;
+  background-color: #3c6e71;
 }
 
 .game-space {
-    outline: solid .5px #7A7A7A;
-    width: 25px;
-    height: 25px;
+  outline: solid 0.5px #7a7a7a;
+  width: 25px;
+  height: 25px;
 }
 
 .i-block {
-    background-color: #04eaea;
+  background-color: #04eaea;
 }
 
 .o-block {
-    background-color: #eaeb05;
+  background-color: #eaeb05;
 }
 .t-block {
-    background-color: #9d04ea;
+  background-color: #8e08d1;
 }
 .s-block {
-    background-color: #04d310;
+  background-color: #04d310;
 }
 .z-block {
-    background-color: #cf0410;
+  background-color: #cf0410;
 }
 .j-block {
-    background-color: #0404dd;
+  background-color: #0404dd;
 }
 .l-block {
-    background-color: #ea9d05;
+  background-color: #ea9d05;
 }
 
 #content {
-    background-color: #D9D9D9;
-    height: 90vh;
-    width: 70vw;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: #d9d9d9;
+  height: 90vh;
+  width: 70vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #game-display {
-    background-color: #353535;
-    width: 250px;
-    height: 500px;
-    border: 5px solid black;
-    display: flex;
-    flex-wrap: wrap;
+  background-color: #353535;
+  width: 250px;
+  height: 500px;
+  border: 5px solid black;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #game-display:focus {
-    outline: 0
+  outline: 0;
 }
