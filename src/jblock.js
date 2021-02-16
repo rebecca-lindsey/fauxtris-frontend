@@ -80,7 +80,7 @@ class jBlock extends FourRotation {
     }
   }
 
-  rotateFourth(board, activeBlocks, keys) {
+  rotateFourth(activeBlocks, keys) {
     const topRow = keys[0];
     const centerRow = keys[1];
     const bottomRow = keys[2];
@@ -88,13 +88,17 @@ class jBlock extends FourRotation {
     const leftIndex = centerIndex - 1;
     const rightIndex = activeBlocks[topRow][1];
 
-    board[topRow][centerIndex] = null;
-    board[centerRow][leftIndex] = "jBlock";
-    board[topRow][rightIndex] = null;
-    board[bottomRow][rightIndex] = "jBlock";
-    board[bottomRow][centerIndex] = null;
-    board[centerRow][rightIndex] = "jBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "first";
+    blocksToRemove[topRow] = [centerIndex, rightIndex];
+    blocksToRemove[bottomRow] = [centerIndex];
+    blocksToAdd[centerRow] = [leftIndex, rightIndex];
+    blocksToAdd[bottomRow] = [rightIndex];
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "first";
+    }
   }
 }
