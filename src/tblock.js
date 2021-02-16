@@ -22,6 +22,7 @@ class tBlock extends FourRotation {
 
     const blocksToRemove = {};
     const blocksToAdd = {};
+
     blocksToRemove[centerRow] = rightIndex;
     blocksToAdd[topRow] = centerIndex;
 
@@ -39,6 +40,7 @@ class tBlock extends FourRotation {
 
     const blocksToRemove = {};
     const blocksToAdd = {};
+
     blocksToRemove[bottomRow] = centerIndex;
     blocksToAdd[centerRow] = rightIndex;
 
@@ -56,6 +58,7 @@ class tBlock extends FourRotation {
 
     const blocksToRemove = {};
     const blocksToAdd = {};
+
     blocksToRemove[centerRow] = leftIndex;
     blocksToAdd[bottomRow] = centerIndex;
 
@@ -73,6 +76,7 @@ class tBlock extends FourRotation {
 
     const blocksToRemove = {};
     const blocksToAdd = {};
+
     blocksToRemove[topRow] = centerIndex;
     blocksToAdd[centerRow] = leftIndex;
 
