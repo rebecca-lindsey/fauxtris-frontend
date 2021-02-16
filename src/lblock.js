@@ -36,7 +36,7 @@ class lBlock extends FourRotation {
     }
   }
 
-  rotateSecond(board, activeBlocks, keys) {
+  rotateSecond(activeBlocks, keys) {
     const topRow = keys[0];
     const centerRow = keys[1];
     const bottomRow = keys[2];
@@ -44,14 +44,18 @@ class lBlock extends FourRotation {
     const centerIndex = activeBlocks[topRow][1];
     const rightIndex = centerIndex + 1;
 
-    board[topRow][leftIndex] = null;
-    board[centerRow][leftIndex] = "lBlock";
-    board[topRow][centerIndex] = null;
-    board[topRow][rightIndex] = "lBlock";
-    board[bottomRow][centerIndex] = null;
-    board[centerRow][rightIndex] = "lBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "third";
+    blocksToRemove[topRow] = [leftIndex, centerIndex];
+    blocksToRemove[bottomRow] = [centerIndex];
+    blocksToAdd[centerRow] = [leftIndex, rightIndex];
+    blocksToAdd[topRow] = [rightIndex];
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "third";
+    }
   }
 
   rotateThird(board, activeBlocks, keys) {
