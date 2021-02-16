@@ -51,4 +51,23 @@ class Tetromino {
 
     Gameplay.populateBoard();
   }
+
+  moveRight(activeBlocks, keys) {
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+
+    keys.forEach((row) => {
+      const firstIndex = activeBlocks[row][0];
+      const lastIndex = activeBlocks[row].slice(-1)[0];
+
+      blocksToRemove[row] = [firstIndex];
+      blocksToAdd[row] = [lastIndex + 1];
+    });
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+    }
+
+    Gameplay.populateBoard();
+  }
 }
