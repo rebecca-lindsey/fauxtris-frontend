@@ -63,7 +63,7 @@ class Gameplay {
     const activeBlocks = Gameplay.findActiveBlocks();
     const keys = Object.keys(activeBlocks);
     if (direction == "left") {
-      this.moveLeft(board, activeBlocks, keys);
+      Tetromino.activeBlock.moveLeft(activeBlocks, keys);
     } else if (direction == "right") {
       this.moveRight(board, activeBlocks, keys);
     } else if (direction == "down") {
@@ -74,16 +74,6 @@ class Gameplay {
     ) {
       Tetromino.activeBlock.rotate(activeBlocks, keys);
     }
-  }
-
-  static moveLeft(board, activeBlocks, keys) {
-    keys.forEach((row) => {
-      const firstIndex = activeBlocks[row][0];
-      const lastIndex = activeBlocks[row].slice(-1)[0];
-      board[row][firstIndex - 1] = Tetromino.activeBlock.constructor.name;
-      board[row][lastIndex] = null;
-    });
-    Gameplay.populateBoard();
   }
 
   static moveRight(board, activeBlocks, keys) {
@@ -129,7 +119,8 @@ class Gameplay {
     let boolean = true;
     for (const [row, indexes] of Object.entries(object)) {
       indexes.forEach((index) => {
-        if (Gameplay.gameBoard[row][index] != null) {
+        console.log(index);
+        if (Gameplay.gameBoard[row][index] != null || index < 0 || index > 9) {
           boolean = false;
         }
       });
