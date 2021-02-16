@@ -25,16 +25,17 @@ class sBlock extends TwoRotation {
   }
 
   rotateFirst(board, activeBlocks, keys) {
-    let furthestLeftBlockCurrentIndex = activeBlocks[keys[1]][0];
-    let furthestLeftBlockNewIndex = furthestLeftBlockCurrentIndex + 2;
-    board[keys[1]][furthestLeftBlockCurrentIndex] = null;
-    board[keys[1]][furthestLeftBlockNewIndex] = "sBlock";
+    const centerRow = keys[0];
+    const bottomRow = keys[1];
+    const topRow = Tetromino.nextLetterRowUpwards(centerRow);
+    const leftIndex = activeBlocks[bottomRow][0];
+    const centerIndex = activeBlocks[centerRow][0];
+    const rightIndex = activeBlocks[centerRow][1];
 
-    let centerBottomBlockCurrentIndex = activeBlocks[keys[1]][1];
-    board[keys[1]][centerBottomBlockCurrentIndex] = null;
-    board[Tetromino.nextLetterRowUpwards(keys[0])][
-      centerBottomBlockCurrentIndex
-    ] = "sBlock";
+    board[bottomRow][leftIndex] = null;
+    board[topRow][centerIndex] = "sBlock";
+    board[bottomRow][centerIndex] = null;
+    board[bottomRow][rightIndex] = "sBlock";
 
     this.orientation = "second";
   }
