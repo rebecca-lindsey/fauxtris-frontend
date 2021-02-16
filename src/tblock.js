@@ -15,6 +15,7 @@ class tBlock extends FourRotation {
   }
 
   rotateFirst(activeBlocks, keys) {
+    debugger;
     const centerRow = keys[0];
     const topRow = Tetromino.nextLetterRowUpwards(centerRow);
     const centerIndex = activeBlocks[centerRow][1];
