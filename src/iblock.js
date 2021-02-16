@@ -71,7 +71,6 @@ class iBlock extends TwoRotation {
         }
       }
     }
-
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "first";

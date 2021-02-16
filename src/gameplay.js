@@ -126,11 +126,14 @@ class Gameplay {
   }
 
   static validMove(object) {
-    for (const [row, index] of Object.entries(object)) {
-      if (Gameplay.gameBoard[row][index] != null) {
-        return false;
-      }
+    let boolean = true;
+    for (const [row, indexes] of Object.entries(object)) {
+      indexes.forEach((index) => {
+        if (Gameplay.gameBoard[row][index] != null) {
+          boolean = false;
+        }
+      });
     }
-    return true;
+    return boolean;
   }
 }
