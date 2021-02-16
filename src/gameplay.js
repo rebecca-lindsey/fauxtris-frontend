@@ -72,7 +72,7 @@ class Gameplay {
       direction == "rotate" &&
       Tetromino.activeBlock.constructor.name != "oBlock"
     ) {
-      Tetromino.activeBlock.rotate(board, activeBlocks, keys);
+      Tetromino.activeBlock.rotate(activeBlocks, keys);
     }
   }
 
