@@ -14,7 +14,7 @@ class jBlock extends FourRotation {
     Gameplay.populateBoard();
   }
 
-  rotateFirst(board, activeBlocks, keys) {
+  rotateFirst(activeBlocks, keys) {
     const topRow = Tetromino.nextLetterRowUpwards(keys[0]);
     const centerRow = keys[0];
     const bottomRow = keys[1];
@@ -22,14 +22,23 @@ class jBlock extends FourRotation {
     const centerIndex = activeBlocks[centerRow][1];
     const rightIndex = activeBlocks[bottomRow][0];
 
-    board[centerRow][leftIndex] = null;
-    board[bottomRow][leftIndex] = "jBlock";
-    board[bottomRow][rightIndex] = null;
-    board[bottomRow][centerIndex] = "jBlock";
-    board[centerRow][rightIndex] = null;
-    board[topRow][centerIndex] = "jBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "second";
+    blocksToRemove[centerRow] = [leftIndex, rightIndex];
+    blocksToRemove[bottomRow] = [rightIndex];
+    blocksToAdd[bottomRow] = [leftIndex, centerIndex];
+    blocksToAdd[topRow] = [centerIndex];
+    //   blocksToRemove[centerRow] = rightIndex
+    // board[bottomRow][leftIndex] = "jBlock";
+
+    // board[bottomRow][centerIndex] = "jBlock";
+
+    // board[topRow][centerIndex] = "jBlock";
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "second";
+    }
   }
 
   rotateSecond(board, activeBlocks, keys) {
