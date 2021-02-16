@@ -15,11 +15,14 @@ class tBlock extends FourRotation {
   }
 
   rotateFirst(board, activeBlocks, keys) {
-    let firstKey = keys[0];
-    let rightBlockIndex = activeBlocks[firstKey][2];
-    let newRowName = Tetromino.nextLetterRowUpwards(firstKey);
-    board[firstKey][rightBlockIndex] = null;
-    board[newRowName][rightBlockIndex - 1] = "tBlock";
+    const centerRow = keys[0];
+    const topRow = Tetromino.nextLetterRowUpwards(centerRow);
+    const centerIndex = activeBlocks[centerRow][1];
+    const rightIndex = activeBlocks[centerRow][2];
+
+    board[centerRow][rightIndex] = null;
+    board[topRow][centerIndex] = "tBlock";
+
     this.orientation = "second";
   }
 
