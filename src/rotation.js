@@ -2,16 +2,16 @@ class FourRotation extends Tetromino {
   rotate(board, activeBlocks, keys) {
     switch (this.orientation) {
       case "first":
-        this.rotateFirst(board, activeBlocks, keys);
+        this.rotateFirst(activeBlocks, keys);
         break;
       case "second":
-        this.rotateSecond(board, activeBlocks, keys);
+        this.rotateSecond(activeBlocks, keys);
         break;
       case "third":
-        this.rotateThird(board, activeBlocks, keys);
+        this.rotateThird(activeBlocks, keys);
         break;
       case "fourth":
-        this.rotateFourth(board, activeBlocks, keys);
+        this.rotateFourth(activeBlocks, keys);
         break;
     }
 

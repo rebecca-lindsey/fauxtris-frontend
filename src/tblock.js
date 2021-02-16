@@ -14,7 +14,7 @@ class tBlock extends FourRotation {
     Gameplay.populateBoard();
   }
 
-  rotateFirst(board, activeBlocks, keys) {
+  rotateFirst(activeBlocks, keys) {
     const centerRow = keys[0];
     const topRow = Tetromino.nextLetterRowUpwards(centerRow);
     const centerIndex = activeBlocks[centerRow][1];
@@ -27,47 +27,58 @@ class tBlock extends FourRotation {
 
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "second";
     }
-
-    // board[centerRow][rightIndex] = null;
-    // board[topRow][centerIndex] = "tBlock";
-
-    this.orientation = "second";
   }
 
-  rotateSecond(board, activeBlocks, keys) {
+  rotateSecond(activeBlocks, keys) {
     const centerRow = keys[1];
     const bottomRow = keys[2];
     const centerIndex = activeBlocks[keys[2]][0];
     const rightIndex = centerIndex + 1;
 
-    board[bottomRow][centerIndex] = null;
-    board[centerRow][rightIndex] = "tBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+    blocksToRemove[bottomRow] = centerIndex;
+    blocksToAdd[centerRow] = rightIndex;
 
-    this.orientation = "third";
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "third";
+    }
   }
 
-  rotateThird(board, activeBlocks, keys) {
+  rotateThird(activeBlocks, keys) {
     const centerRow = keys[1];
     const bottomRow = Tetromino.nextLetterRowDownwards(centerRow);
     const leftIndex = activeBlocks[centerRow][0];
     const centerIndex = activeBlocks[centerRow][1];
 
-    board[centerRow][leftIndex] = null;
-    board[bottomRow][centerIndex] = "tBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+    blocksToRemove[centerRow] = leftIndex;
+    blocksToAdd[bottomRow] = centerIndex;
 
-    this.orientation = "fourth";
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "fourth";
+    }
   }
 
-  rotateFourth(board, activeBlocks, keys) {
+  rotateFourth(activeBlocks, keys) {
     const topRow = keys[0];
     const centerRow = keys[1];
     const centerIndex = activeBlocks[topRow][0];
     const leftIndex = centerIndex - 1;
 
-    board[topRow][centerIndex] = null;
-    board[centerRow][leftIndex] = "tBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+    blocksToRemove[topRow] = centerIndex;
+    blocksToAdd[centerRow] = leftIndex;
 
-    this.orientation = "first";
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "first";
+    }
   }
 }
