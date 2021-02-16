@@ -27,10 +27,14 @@ class tBlock extends FourRotation {
   }
 
   rotateSecond(board, activeBlocks, keys) {
-    let currentBlockIndex = activeBlocks[keys[2]][0];
-    let newBlockIndex = activeBlocks[keys[1]][1] + 1;
-    board[keys[2]][currentBlockIndex] = null;
-    board[keys[1]][newBlockIndex] = "tBlock";
+    let centerRow = keys[1];
+    let bottomRow = keys[2];
+    let centerIndex = activeBlocks[keys[2]][0];
+    let rightIndex = centerIndex + 1;
+
+    board[bottomRow][centerIndex] = null;
+    board[centerRow][rightIndex] = "tBlock";
+
     this.orientation = "third";
   }
 
