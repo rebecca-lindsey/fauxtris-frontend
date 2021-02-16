@@ -13,26 +13,42 @@ class iBlock extends TwoRotation {
     Gameplay.populateBoard();
   }
 
-  rotateFirst(board, activeBlocks, keys) {
+  rotateFirst(activeBlocks, keys) {
     const currentRowName = keys[0];
     const firstIndex = activeBlocks[currentRowName][0];
     const lastIndex = activeBlocks[currentRowName].slice(-1)[0];
-    const row = board[currentRowName];
     const verticalIndex = activeBlocks[currentRowName][2];
     let alphaIncrementor = 2;
 
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+
     for (let i = firstIndex; i <= lastIndex; i++) {
+      if (i != verticalIndex) {
+        if (blocksToRemove.hasOwnProperty(currentRowName)) {
+          blocksToRemove[currentRowName].push(i);
+        } else {
+          blocksToRemove[currentRowName] = [i];
+        }
+      }
+
       const newRowName = `${String.fromCharCode(
         currentRowName.charCodeAt(0) + alphaIncrementor
       )}Row`;
-      row[i] = null;
-      Gameplay.gameBoard[newRowName][verticalIndex] = "iBlock";
+      if (i != verticalIndex) {
+        blocksToAdd[newRowName] = verticalIndex;
+      }
+
       alphaIncrementor -= 1;
     }
-    this.orientation = "second";
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "second";
+    }
   }
 
-  rotateSecond(board, activeBlocks, keys) {
+  rotateSecond(activeBlocks, keys) {
     const originalIndex = activeBlocks[keys[0]][0];
     const newRowName = keys[2];
     for (const row in activeBlocks) {

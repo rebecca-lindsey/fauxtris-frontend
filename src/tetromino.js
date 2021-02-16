@@ -19,8 +19,10 @@ class Tetromino {
   }
 
   removeBlocks(blocksToRemove) {
-    for (const [row, index] of Object.entries(blocksToRemove)) {
-      Gameplay.gameBoard[row][index] = null;
+    for (const row in blocksToRemove) {
+      blocksToRemove[row].map(
+        (index) => (Gameplay.gameBoard[row][index] = null)
+      );
     }
   }
 
