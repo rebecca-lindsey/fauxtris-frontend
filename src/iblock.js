@@ -35,8 +35,8 @@ class iBlock extends TwoRotation {
       const newRowName = `${String.fromCharCode(
         currentRowName.charCodeAt(0) + alphaIncrementor
       )}Row`;
-      if (i != verticalIndex) {
-        blocksToAdd[newRowName] = verticalIndex;
+      if (currentRowName != newRowName) {
+        blocksToAdd[newRowName] = [verticalIndex];
       }
 
       alphaIncrementor -= 1;
@@ -51,13 +51,30 @@ class iBlock extends TwoRotation {
   rotateSecond(activeBlocks, keys) {
     const originalIndex = activeBlocks[keys[0]][0];
     const newRowName = keys[2];
+
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+
     for (const row in activeBlocks) {
-      const index = activeBlocks[row][0];
-      board[row][index] = null;
+      if (row != newRowName) {
+        const index = activeBlocks[row][0];
+        blocksToRemove[row] = [index];
+      }
     }
+
     for (let i = originalIndex - 2; i <= originalIndex + 1; i++) {
-      board[newRowName][i] = "iBlock";
+      if (i != originalIndex) {
+        if (blocksToAdd.hasOwnProperty(newRowName)) {
+          blocksToAdd[newRowName].push(i);
+        } else {
+          blocksToAdd[newRowName] = [i];
+        }
+      }
     }
-    this.orientation = "first";
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "first";
+    }
   }
 }

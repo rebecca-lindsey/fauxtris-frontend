@@ -13,8 +13,10 @@ class Tetromino {
   }
 
   addBlocks(blocksToAdd) {
-    for (const [row, index] of Object.entries(blocksToAdd)) {
-      Gameplay.gameBoard[row][index] = this.constructor.name;
+    for (const row in blocksToAdd) {
+      blocksToAdd[row].map(
+        (index) => (Gameplay.gameBoard[row][index] = this.constructor.name)
+      );
     }
   }
 
@@ -27,7 +29,7 @@ class Tetromino {
   }
 
   updateBlocks(blocksToAdd, blocksToRemove) {
-    this.addBlocks(blocksToAdd);
     this.removeBlocks(blocksToRemove);
+    this.addBlocks(blocksToAdd);
   }
 }
