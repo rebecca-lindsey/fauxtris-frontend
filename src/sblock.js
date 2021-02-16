@@ -41,14 +41,18 @@ class sBlock extends TwoRotation {
   }
 
   rotateSecond(board, activeBlocks, keys) {
-    let bottomBlockCurrentIndex = activeBlocks[keys[2]][0];
-    let bottomBlockNewIndex = bottomBlockCurrentIndex - 2;
-    board[keys[2]][bottomBlockCurrentIndex] = null;
-    board[keys[2]][bottomBlockNewIndex] = "sBlock";
+    const topRow = keys[0];
+    const centerRow = keys[1];
+    const bottomRow = keys[2];
+    const centerIndex = activeBlocks[centerRow][0];
+    const rightIndex = activeBlocks[centerRow][1];
+    const leftIndex = centerIndex - 1;
 
-    let topBlockCurrentIndex = activeBlocks[keys[0]][0];
-    board[keys[0]][topBlockCurrentIndex] = null;
-    board[keys[2]][topBlockCurrentIndex] = "sBlock";
+    board[bottomRow][rightIndex] = null;
+    board[bottomRow][leftIndex] = "sBlock";
+    board[topRow][centerIndex] = null;
+    board[bottomRow][centerIndex] = "sBlock";
+
     this.orientation = "first";
   }
 }
