@@ -24,7 +24,7 @@ class sBlock extends TwoRotation {
     Gameplay.populateBoard();
   }
 
-  rotateFirst(board, activeBlocks, keys) {
+  rotateFirst(activeBlocks, keys) {
     const centerRow = keys[0];
     const bottomRow = keys[1];
     const topRow = Tetromino.nextLetterRowUpwards(centerRow);
@@ -32,12 +32,17 @@ class sBlock extends TwoRotation {
     const centerIndex = activeBlocks[centerRow][0];
     const rightIndex = activeBlocks[centerRow][1];
 
-    board[bottomRow][leftIndex] = null;
-    board[topRow][centerIndex] = "sBlock";
-    board[bottomRow][centerIndex] = null;
-    board[bottomRow][rightIndex] = "sBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "second";
+    blocksToRemove[bottomRow] = [leftIndex, centerIndex];
+    blocksToAdd[topRow] = [centerIndex];
+    blocksToAdd[bottomRow] = [rightIndex];
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "second";
+    }
   }
 
   rotateSecond(board, activeBlocks, keys) {
