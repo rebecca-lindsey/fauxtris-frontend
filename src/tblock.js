@@ -51,10 +51,14 @@ class tBlock extends FourRotation {
   }
 
   rotateFourth(board, activeBlocks, keys) {
-    let currentBlockIndex = activeBlocks[keys[0]][0];
-    let newBlockIndex = currentBlockIndex - 1;
-    board[keys[0]][currentBlockIndex] = null;
-    board[keys[1]][newBlockIndex] = "tBlock";
+    const topRow = keys[0];
+    const centerRow = keys[1];
+    const centerIndex = activeBlocks[topRow][0];
+    const leftIndex = centerIndex - 1;
+
+    board[topRow][centerIndex] = null;
+    board[centerRow][leftIndex] = "tBlock";
+
     this.orientation = "first";
   }
 }
