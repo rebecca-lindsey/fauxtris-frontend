@@ -24,19 +24,25 @@ class zBlock extends TwoRotation {
     Gameplay.populateBoard();
   }
 
-  rotateFirst(board, activeBlocks, keys) {
+  rotateFirst(activeBlocks, keys) {
     const centerRow = keys[0];
     const bottomRow = keys[1];
     const topRow = Tetromino.nextLetterRowUpwards(centerRow);
     const leftIndex = activeBlocks[centerRow][0];
     const rightIndex = activeBlocks[bottomRow][1];
 
-    board[bottomRow][rightIndex] = null;
-    board[topRow][rightIndex] = "zBlock";
-    board[centerRow][leftIndex] = null;
-    board[centerRow][rightIndex] = "zBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "second";
+    blocksToRemove[centerRow] = [leftIndex];
+    blocksToRemove[bottomRow] = [rightIndex];
+    blocksToAdd[topRow] = [rightIndex];
+    blocksToAdd[centerRow] = [rightIndex];
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "second";
+    }
   }
 
   rotateSecond(board, activeBlocks, keys) {
