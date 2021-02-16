@@ -11,4 +11,21 @@ class Tetromino {
   static nextLetterRowDownwards(rowName) {
     return `${String.fromCharCode(rowName.charCodeAt(0) - 1)}Row`;
   }
+
+  addBlocks(blocksToAdd) {
+    for (const [row, index] of Object.entries(blocksToAdd)) {
+      Gameplay.gameBoard[row][index] = this.constructor.name;
+    }
+  }
+
+  removeBlocks(blocksToRemove) {
+    for (const [row, index] of Object.entries(blocksToRemove)) {
+      Gameplay.gameBoard[row][index] = null;
+    }
+  }
+
+  updateBlocks(blocksToAdd, blocksToRemove) {
+    this.addBlocks(blocksToAdd);
+    this.removeBlocks(blocksToRemove);
+  }
 }

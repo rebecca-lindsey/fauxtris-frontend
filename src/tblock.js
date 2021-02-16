@@ -20,8 +20,17 @@ class tBlock extends FourRotation {
     const centerIndex = activeBlocks[centerRow][1];
     const rightIndex = activeBlocks[centerRow][2];
 
-    board[centerRow][rightIndex] = null;
-    board[topRow][centerIndex] = "tBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+    blocksToRemove[centerRow] = rightIndex;
+    blocksToAdd[topRow] = centerIndex;
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+    }
+
+    // board[centerRow][rightIndex] = null;
+    // board[topRow][centerIndex] = "tBlock";
 
     this.orientation = "second";
   }

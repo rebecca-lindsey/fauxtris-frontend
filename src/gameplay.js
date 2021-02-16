@@ -124,4 +124,13 @@ class Gameplay {
     }
     return activeBlocks;
   }
+
+  static validMove(object) {
+    for (const [row, index] of Object.entries(object)) {
+      if (Gameplay.gameBoard[row][index] != null) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
