@@ -40,14 +40,16 @@ class zBlock extends TwoRotation {
   }
 
   rotateSecond(board, activeBlocks, keys) {
-    const topBlockIndex = activeBlocks[keys[0]][0];
-    board[keys[2]][topBlockIndex] = "zBlock";
-    board[keys[0]][topBlockIndex] = null;
+    const topRow = keys[0];
+    const centerRow = keys[1];
+    const bottomRow = keys[2];
+    const rightIndex = activeBlocks[topRow][0];
+    const leftIndex = activeBlocks[centerRow][0] - 1;
 
-    const rightCenterBlockCurrentIndex = activeBlocks[keys[1]][1];
-    const rightCenterBlockNewIndex = rightCenterBlockCurrentIndex - 2;
-    board[keys[1]][rightCenterBlockCurrentIndex] = null;
-    board[keys[1]][rightCenterBlockNewIndex] = "zBlock";
+    board[topRow][rightIndex] = null;
+    board[bottomRow][rightIndex] = "zBlock";
+    board[centerRow][rightIndex] = null;
+    board[centerRow][leftIndex] = "zBlock";
 
     this.orientation = "first";
   }
