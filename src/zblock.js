@@ -25,15 +25,16 @@ class zBlock extends TwoRotation {
   }
 
   rotateFirst(board, activeBlocks, keys) {
-    const furthestRightBlockCurrentIndex = activeBlocks[keys[1]][1];
-    const newTopRow = Tetromino.nextLetterRowUpwards(keys[0]);
-    board[newTopRow][furthestRightBlockCurrentIndex] = "zBlock";
-    board[keys[1]][furthestRightBlockCurrentIndex] = null;
+    const centerRow = keys[0];
+    const bottomRow = keys[1];
+    const topRow = Tetromino.nextLetterRowUpwards(centerRow);
+    const leftIndex = activeBlocks[centerRow][0];
+    const rightIndex = activeBlocks[bottomRow][1];
 
-    const furthestLeftBlockCurrentIndex = activeBlocks[keys[0]][0];
-    const furthestLeftBlockNewIndex = furthestLeftBlockCurrentIndex + 2;
-    board[keys[0]][furthestLeftBlockCurrentIndex] = null;
-    board[keys[0]][furthestLeftBlockNewIndex] = "zBlock";
+    board[bottomRow][rightIndex] = null;
+    board[topRow][rightIndex] = "zBlock";
+    board[centerRow][leftIndex] = null;
+    board[centerRow][rightIndex] = "zBlock";
 
     this.orientation = "second";
   }
