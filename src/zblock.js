@@ -45,18 +45,24 @@ class zBlock extends TwoRotation {
     }
   }
 
-  rotateSecond(board, activeBlocks, keys) {
+  rotateSecond(activeBlocks, keys) {
     const topRow = keys[0];
     const centerRow = keys[1];
     const bottomRow = keys[2];
     const rightIndex = activeBlocks[topRow][0];
     const leftIndex = activeBlocks[centerRow][0] - 1;
 
-    board[topRow][rightIndex] = null;
-    board[bottomRow][rightIndex] = "zBlock";
-    board[centerRow][rightIndex] = null;
-    board[centerRow][leftIndex] = "zBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "first";
+    blocksToRemove[topRow] = [rightIndex];
+    blocksToRemove[centerRow] = [rightIndex];
+    blocksToAdd[centerRow] = [leftIndex];
+    blocksToAdd[bottomRow] = [rightIndex];
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "first";
+    }
   }
 }
