@@ -45,7 +45,7 @@ class sBlock extends TwoRotation {
     }
   }
 
-  rotateSecond(board, activeBlocks, keys) {
+  rotateSecond(activeBlocks, keys) {
     const topRow = keys[0];
     const centerRow = keys[1];
     const bottomRow = keys[2];
@@ -53,11 +53,16 @@ class sBlock extends TwoRotation {
     const rightIndex = activeBlocks[centerRow][1];
     const leftIndex = centerIndex - 1;
 
-    board[bottomRow][rightIndex] = null;
-    board[bottomRow][leftIndex] = "sBlock";
-    board[topRow][centerIndex] = null;
-    board[bottomRow][centerIndex] = "sBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "first";
+    blocksToRemove[bottomRow] = [rightIndex];
+    blocksToRemove[topRow] = [centerIndex];
+    blocksToAdd[bottomRow] = [leftIndex, centerIndex];
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "first";
+    }
   }
 }
