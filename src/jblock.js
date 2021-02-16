@@ -29,19 +29,14 @@ class jBlock extends FourRotation {
     blocksToRemove[bottomRow] = [rightIndex];
     blocksToAdd[bottomRow] = [leftIndex, centerIndex];
     blocksToAdd[topRow] = [centerIndex];
-    //   blocksToRemove[centerRow] = rightIndex
-    // board[bottomRow][leftIndex] = "jBlock";
 
-    // board[bottomRow][centerIndex] = "jBlock";
-
-    // board[topRow][centerIndex] = "jBlock";
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "second";
     }
   }
 
-  rotateSecond(board, activeBlocks, keys) {
+  rotateSecond(activeBlocks, keys) {
     const topRow = keys[0];
     const centerRow = keys[1];
     const bottomRow = keys[2];
@@ -49,14 +44,18 @@ class jBlock extends FourRotation {
     const centerIndex = activeBlocks[bottomRow][1];
     const rightIndex = centerIndex + 1;
 
-    board[bottomRow][leftIndex] = null;
-    board[topRow][leftIndex] = "jBlock";
-    board[bottomRow][centerIndex] = null;
-    board[centerRow][leftIndex] = "jBlock";
-    board[topRow][centerIndex] = null;
-    board[centerRow][rightIndex] = "jBlock";
+    const blocksToRemove = {};
+    const blocksToAdd = {};
 
-    this.orientation = "third";
+    blocksToRemove[bottomRow] = [leftIndex, centerIndex];
+    blocksToRemove[topRow] = [centerIndex];
+    blocksToAdd[topRow] = [leftIndex];
+    blocksToAdd[centerRow] = [leftIndex, rightIndex];
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+      this.orientation = "third";
+    }
   }
 
   rotateThird(board, activeBlocks, keys) {
