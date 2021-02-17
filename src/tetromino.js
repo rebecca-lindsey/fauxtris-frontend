@@ -5,11 +5,15 @@ class Tetromino {
   static activeBlock;
 
   static nextLetterRowUpwards(rowName) {
-    return `${String.fromCharCode(rowName.charCodeAt(0) + 1)}Row`;
+    if (rowName === Object.keys(Gameplay.gameBoard)[0]) {
+      return "invalidRow";
+    } else {
+      return `${String.fromCharCode(rowName.charCodeAt(0) + 1)}Row`;
+    }
   }
 
   static nextLetterRowDownwards(rowName) {
-    if (rowName === "aRow") {
+    if (rowName === Object.keys(Gameplay.gameBoard).slice(-1)[0]) {
       return "invalidRow";
     } else {
       return `${String.fromCharCode(rowName.charCodeAt(0) - 1)}Row`;
