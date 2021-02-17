@@ -94,18 +94,22 @@ class Gameplay {
     return activeBlocks;
   }
 
-  static validMove(blocksToAdd, blocksToRemove) {
+  static validMove(blocksToAdd) {
     let boolean = true;
-    Tetromino.activeBlock.removeBlocks(blocksToRemove);
     for (const [row, indexes] of Object.entries(blocksToAdd)) {
-      indexes.forEach((index) => {
-        if (Gameplay.gameBoard[row][index] != null || index < 0 || index > 9) {
-          boolean = false;
-        }
-      });
-    }
-    if (boolean === false) {
-      Tetromino.activeBlock.addBlocks(blocksToRemove);
+      if (row === "invalidRow") {
+        boolean = false;
+      } else {
+        indexes.forEach((index) => {
+          if (
+            Gameplay.gameBoard[row][index] != null ||
+            index < 0 ||
+            index > 9
+          ) {
+            boolean = false;
+          }
+        });
+      }
     }
     return boolean;
   }
