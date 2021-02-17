@@ -36,7 +36,7 @@ class Tetromino {
     }
   }
 
-  updateBlocks(blocksToAdd, blocksToRemove) {
+  updateBlocks(blocksToAdd, blocksToRemove = {}) {
     this.removeBlocks(blocksToRemove);
 
     if (Gameplay.validMove(blocksToAdd)) {
