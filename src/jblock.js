@@ -2,7 +2,6 @@ class jBlock extends FourRotation {
   constructor(orientation) {
     super(orientation);
     this.activeBlocks = this.populateJBlock();
-    Tetromino.activeBlock = this;
   }
 
   populateJBlock() {

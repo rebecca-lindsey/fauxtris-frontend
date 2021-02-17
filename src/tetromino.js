@@ -1,6 +1,7 @@
 class Tetromino {
   constructor() {
     this.orientation = "first";
+    Tetromino.activeBlock = this;
   }
   static activeBlock;
 

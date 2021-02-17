@@ -1,9 +1,7 @@
 class lBlock extends FourRotation {
   constructor(orientation) {
     super(orientation);
-    this.active = true;
-    Tetromino.activeBlock = this;
-    this.populateLBlock();
+    this.activeBlocks = this.populateLBlock();
   }
 
   populateLBlock() {
