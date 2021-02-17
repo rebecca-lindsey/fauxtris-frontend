@@ -82,24 +82,6 @@ class Gameplay {
     }
   }
 
-  // static findActiveBlocks() {
-  //   const activeBlocks = {};
-  //   for (const row in Gameplay.gameBoard) {
-  //     if (Gameplay.gameBoard[row].some((item) => item != null)) {
-  //       Gameplay.gameBoard[row].forEach((value, index) => {
-  //         if (value == Tetromino.activeBlock.constructor.name) {
-  //           if (activeBlocks[row]) {
-  //             activeBlocks[row].push(index);
-  //           } else {
-  //             activeBlocks[row] = [index];
-  //           }
-  //         }
-  //       });
-  //     }
-  //   }
-  //   return activeBlocks;
-  // }
-
   static validMove(blocksToAdd) {
     let boolean = true;
     for (const [row, indexes] of Object.entries(blocksToAdd)) {

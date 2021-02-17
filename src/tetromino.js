@@ -22,18 +22,40 @@ class Tetromino {
   }
 
   addBlocks(blocksToAdd) {
+    const activeBlocks = Tetromino.activeTetromino.activeBlocks;
+
     for (const row in blocksToAdd) {
-      blocksToAdd[row].map(
-        (index) => (Gameplay.gameBoard[row][index] = this.constructor.name)
-      );
+      blocksToAdd[row].map((index) => {
+        Gameplay.gameBoard[row][index] = this.constructor.name;
+
+        if (activeBlocks != undefined) {
+          if (activeBlocks.hasOwnProperty(row)) {
+            activeBlocks[row].push(index);
+          } else {
+            activeBlocks[row] = [index];
+          }
+        }
+      });
     }
   }
 
   removeBlocks(blocksToRemove) {
+    const activeBlocks = Tetromino.activeTetromino.activeBlocks;
+
     for (const row in blocksToRemove) {
-      blocksToRemove[row].map(
-        (index) => (Gameplay.gameBoard[row][index] = null)
-      );
+      blocksToRemove[row].map((index) => {
+        Gameplay.gameBoard[row][index] = null;
+
+        if (activeBlocks != undefined) {
+          if (activeBlocks[row].length == 1) {
+            delete activeBlocks[row];
+          } else {
+            activeBlocks[row] = activeBlocks[row].filter(
+              (number) => number !== index
+            );
+          }
+        }
+      });
     }
   }
 
@@ -42,6 +64,7 @@ class Tetromino {
 
     if (Gameplay.validMove(blocksToAdd)) {
       this.addBlocks(blocksToAdd);
+      // this.activeBlocks = blocksToAdd;
       Gameplay.populateBoard();
     } else {
       this.addBlocks(blocksToRemove);
@@ -53,8 +76,8 @@ class Tetromino {
     const blocksToAdd = {};
 
     keys.forEach((row) => {
-      const firstIndex = activeBlocks[row][0];
-      const lastIndex = activeBlocks[row].slice(-1)[0];
+      const firstIndex = Math.min(...activeBlocks[row]);
+      const lastIndex = Math.max(...activeBlocks[row]);
 
       blocksToRemove[row] = [lastIndex];
       blocksToAdd[row] = [firstIndex - 1];
@@ -68,8 +91,8 @@ class Tetromino {
     const blocksToAdd = {};
 
     keys.forEach((row) => {
-      const firstIndex = activeBlocks[row][0];
-      const lastIndex = activeBlocks[row].slice(-1)[0];
+      const firstIndex = Math.min(...activeBlocks[row]);
+      const lastIndex = Math.max(...activeBlocks[row]);
 
       blocksToRemove[row] = [firstIndex];
       blocksToAdd[row] = [lastIndex + 1];
