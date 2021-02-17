@@ -65,7 +65,6 @@ class Tetromino {
 
     if (Gameplay.validMove(blocksToAdd)) {
       this.addBlocks(blocksToAdd);
-      // this.activeBlocks = blocksToAdd;
       Gameplay.populateBoard();
     } else {
       this.addBlocks(blocksToRemove);

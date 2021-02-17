@@ -53,6 +53,7 @@ class Gameplay {
       zBlock: "z-block",
       jBlock: "j-block",
       lBlock: "l-block",
+      flash: "flash",
     };
     return colorList[space];
   }
@@ -114,5 +115,28 @@ class Gameplay {
       }
     }
     return boolean;
+  }
+
+  // FIXME: Make this dynamic to search entire board
+
+  static rowClear() {
+    const board = Gameplay.gameBoard;
+    if (board["aRow"].every((element) => element != null)) {
+      for (let index = 0; index < 10; index++) {
+        board["aRow"][index] = "flash";
+      }
+      Gameplay.populateBoard();
+    }
+    setTimeout(Gameplay.rowDrop, 200);
+  }
+
+  static rowDrop() {
+    const board = Gameplay.gameBoard;
+    const keyArray = Object.keys(board).sort();
+    for (let i = 0; i < keyArray.length - 1; i++) {
+      board[keyArray[i]] = board[keyArray[i + 1]];
+    }
+    board[keyArray[keyArray.length - 1]] = Array(10).fill(null);
+    Gameplay.populateBoard();
   }
 }
