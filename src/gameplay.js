@@ -67,24 +67,13 @@ class Gameplay {
     } else if (direction == "right") {
       Tetromino.activeBlock.moveRight(activeBlocks, keys);
     } else if (direction == "down") {
-      this.moveDown(board, activeBlocks, keys);
+      Tetromino.activeBlock.moveDown(activeBlocks, keys);
     } else if (
       direction == "rotate" &&
       Tetromino.activeBlock.constructor.name != "oBlock"
     ) {
       Tetromino.activeBlock.rotate(activeBlocks, keys);
     }
-  }
-
-  static moveDown(board, activeBlocks, keys) {
-    for (let i = keys.length; i > 0; i--) {
-      const newLetter = `${String.fromCharCode(keys[0].charCodeAt(0) - i)}Row`;
-      activeBlocks[keys[i - 1]].forEach((index) => {
-        board[keys[i - 1]][index] = null;
-        board[newLetter][index] = Tetromino.activeBlock.constructor.name;
-      });
-    }
-    Gameplay.populateBoard();
   }
 
   static findActiveBlocks() {
@@ -105,15 +94,18 @@ class Gameplay {
     return activeBlocks;
   }
 
-  static validMove(object) {
+  static validMove(blocksToAdd, blocksToRemove) {
     let boolean = true;
-    for (const [row, indexes] of Object.entries(object)) {
+    Tetromino.activeBlock.removeBlocks(blocksToRemove);
+    for (const [row, indexes] of Object.entries(blocksToAdd)) {
       indexes.forEach((index) => {
-        console.log(index);
         if (Gameplay.gameBoard[row][index] != null || index < 0 || index > 9) {
           boolean = false;
         }
       });
+    }
+    if (boolean === false) {
+      Tetromino.activeBlock.addBlocks(blocksToRemove);
     }
     return boolean;
   }

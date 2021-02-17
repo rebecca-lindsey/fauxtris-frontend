@@ -23,8 +23,8 @@ class tBlock extends FourRotation {
     const blocksToRemove = {};
     const blocksToAdd = {};
 
-    blocksToRemove[centerRow] = rightIndex;
-    blocksToAdd[topRow] = centerIndex;
+    blocksToRemove[centerRow] = [rightIndex];
+    blocksToAdd[topRow] = [centerIndex];
 
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
@@ -41,8 +41,8 @@ class tBlock extends FourRotation {
     const blocksToRemove = {};
     const blocksToAdd = {};
 
-    blocksToRemove[bottomRow] = centerIndex;
-    blocksToAdd[centerRow] = rightIndex;
+    blocksToRemove[bottomRow] = [centerIndex];
+    blocksToAdd[centerRow] = [rightIndex];
 
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
@@ -59,8 +59,8 @@ class tBlock extends FourRotation {
     const blocksToRemove = {};
     const blocksToAdd = {};
 
-    blocksToRemove[centerRow] = leftIndex;
-    blocksToAdd[bottomRow] = centerIndex;
+    blocksToRemove[centerRow] = [leftIndex];
+    blocksToAdd[bottomRow] = [centerIndex];
 
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
@@ -77,8 +77,8 @@ class tBlock extends FourRotation {
     const blocksToRemove = {};
     const blocksToAdd = {};
 
-    blocksToRemove[topRow] = centerIndex;
-    blocksToAdd[centerRow] = leftIndex;
+    blocksToRemove[topRow] = [centerIndex];
+    blocksToAdd[centerRow] = [leftIndex];
 
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);

@@ -70,4 +70,20 @@ class Tetromino {
 
     Gameplay.populateBoard();
   }
+
+  moveDown(activeBlocks, keys) {
+    const blocksToRemove = {};
+    const blocksToAdd = {};
+
+    for (let i = 0; i < keys.length; i++) {
+      blocksToRemove[keys[i]] = activeBlocks[keys[i]];
+      blocksToAdd[Tetromino.nextLetterRowDownwards(keys[i])] =
+        activeBlocks[keys[i]];
+    }
+
+    if (Gameplay.validMove(blocksToAdd, blocksToRemove)) {
+      this.updateBlocks(blocksToAdd, blocksToRemove);
+    }
+    Gameplay.populateBoard();
+  }
 }
