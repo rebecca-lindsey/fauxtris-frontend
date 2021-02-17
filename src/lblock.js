@@ -5,11 +5,21 @@ class lBlock extends FourRotation {
   }
 
   populateLBlock() {
+    const blocksToAdd = {};
+    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
+    const secondRowName = Object.keys(Gameplay.gameBoard)[1];
+
     for (let i = 3; i < 6; i++) {
-      Gameplay.gameBoard["tRow"][i] = "lBlock";
+      if (blocksToAdd.hasOwnProperty(firstRowName)) {
+        blocksToAdd[firstRowName].push(i);
+      } else {
+        blocksToAdd[firstRowName] = [i];
+      }
     }
-    Gameplay.gameBoard["sRow"][3] = "lBlock";
-    Gameplay.populateBoard();
+    blocksToAdd[secondRowName] = [3];
+
+    this.updateBlocks(blocksToAdd);
+    return blocksToAdd;
   }
 
   rotateFirst(activeBlocks, keys) {
