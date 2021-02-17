@@ -1,9 +1,8 @@
 class iBlock extends TwoRotation {
   constructor(orientation) {
     super(orientation);
-    this.active = true;
+    this.activeBlocks = this.populateIBlock();
     Tetromino.activeBlock = this;
-    this.populateIBlock();
   }
 
   populateIBlock() {
@@ -17,6 +16,7 @@ class iBlock extends TwoRotation {
       }
     }
     this.updateBlocks(blocksToAdd);
+    return blocksToAdd;
   }
 
   rotateFirst(activeBlocks, keys) {
