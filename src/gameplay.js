@@ -30,6 +30,20 @@ class Gameplay {
     }
   }
 
+  static generateNewBlock() {
+    const randomNum = Math.floor(Math.random() * 7);
+    const tetrominoArray = [
+      iBlock,
+      jBlock,
+      lBlock,
+      oBlock,
+      sBlock,
+      tBlock,
+      zBlock,
+    ];
+    new tetrominoArray[randomNum]();
+  }
+
   static addColor(space) {
     const colorList = {
       iBlock: "i-block",
