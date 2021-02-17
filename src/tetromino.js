@@ -30,7 +30,13 @@ class Tetromino {
 
   updateBlocks(blocksToAdd, blocksToRemove) {
     this.removeBlocks(blocksToRemove);
-    this.addBlocks(blocksToAdd);
+
+    if (Gameplay.validMove(blocksToAdd)) {
+      this.addBlocks(blocksToAdd);
+      Gameplay.populateBoard();
+    } else {
+      this.addBlocks(blocksToRemove);
+    }
   }
 
   moveLeft(activeBlocks, keys) {
@@ -45,11 +51,7 @@ class Tetromino {
       blocksToAdd[row] = [firstIndex - 1];
     });
 
-    if (Gameplay.validMove(blocksToAdd)) {
-      this.updateBlocks(blocksToAdd, blocksToRemove);
-    }
-
-    Gameplay.populateBoard();
+    this.updateBlocks(blocksToAdd, blocksToRemove);
   }
 
   moveRight(activeBlocks, keys) {
@@ -64,11 +66,7 @@ class Tetromino {
       blocksToAdd[row] = [lastIndex + 1];
     });
 
-    if (Gameplay.validMove(blocksToAdd)) {
-      this.updateBlocks(blocksToAdd, blocksToRemove);
-    }
-
-    Gameplay.populateBoard();
+    this.updateBlocks(blocksToAdd, blocksToRemove);
   }
 
   moveDown(activeBlocks, keys) {
@@ -81,9 +79,6 @@ class Tetromino {
         activeBlocks[keys[i]];
     }
 
-    if (Gameplay.validMove(blocksToAdd, blocksToRemove)) {
-      this.updateBlocks(blocksToAdd, blocksToRemove);
-    }
-    Gameplay.populateBoard();
+    this.updateBlocks(blocksToAdd, blocksToRemove);
   }
 }
