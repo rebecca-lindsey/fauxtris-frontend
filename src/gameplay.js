@@ -59,20 +59,25 @@ class Gameplay {
   }
 
   static moveActivePiece(direction) {
-    const board = Gameplay.gameBoard;
-    const activeBlocks = Gameplay.findActiveBlocks();
-    const keys = Object.keys(activeBlocks);
-    if (direction == "left") {
-      Tetromino.activeBlock.moveLeft(activeBlocks, keys);
-    } else if (direction == "right") {
-      Tetromino.activeBlock.moveRight(activeBlocks, keys);
-    } else if (direction == "down") {
-      Tetromino.activeBlock.moveDown(activeBlocks, keys);
-    } else if (
-      direction == "rotate" &&
-      Tetromino.activeBlock.constructor.name != "oBlock"
-    ) {
-      Tetromino.activeBlock.rotate(activeBlocks, keys);
+    const activeBlockObject = Gameplay.findActiveBlocks();
+    const keys = Object.keys(activeBlockObject);
+    const activeTetromino = Tetromino.activeBlock;
+
+    switch (direction) {
+      case "left":
+        activeTetromino.moveLeft(activeBlockObject, keys);
+        break;
+      case "right":
+        activeTetromino.moveRight(activeBlockObject, keys);
+        break;
+      case "down":
+        activeTetromino.moveDown(activeBlockObject, keys);
+        break;
+      case "rotate":
+        if (activeTetromino.constructor.name != "oBlock") {
+          activeTetromino.rotate(activeBlockObject, keys);
+        }
+        break;
     }
   }
 
