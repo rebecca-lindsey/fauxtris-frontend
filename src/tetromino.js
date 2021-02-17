@@ -34,6 +34,7 @@ class Tetromino {
           } else {
             activeBlocks[row] = [index];
           }
+          activeBlocks[row] = activeBlocks[row].sort();
         }
       });
     }

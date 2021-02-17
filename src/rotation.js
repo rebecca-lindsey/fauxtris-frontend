@@ -1,17 +1,18 @@
 class FourRotation extends Tetromino {
   rotate(activeBlocks, keys) {
+    const keyArray = keys.sort().reverse();
     switch (this.orientation) {
       case "first":
-        this.rotateFirst(activeBlocks, keys);
+        this.rotateFirst(activeBlocks, keyArray);
         break;
       case "second":
-        this.rotateSecond(activeBlocks, keys);
+        this.rotateSecond(activeBlocks, keyArray);
         break;
       case "third":
-        this.rotateThird(activeBlocks, keys);
+        this.rotateThird(activeBlocks, keyArray);
         break;
       case "fourth":
-        this.rotateFourth(activeBlocks, keys);
+        this.rotateFourth(activeBlocks, keyArray);
         break;
     }
 
@@ -21,10 +22,11 @@ class FourRotation extends Tetromino {
 
 class TwoRotation extends Tetromino {
   rotate(activeBlocks, keys) {
+    const keyArray = keys.sort().reverse();
     if (this.orientation == "first") {
-      this.rotateFirst(activeBlocks, keys);
+      this.rotateFirst(activeBlocks, keyArray);
     } else if (this.orientation == "second") {
-      this.rotateSecond(activeBlocks, keys);
+      this.rotateSecond(activeBlocks, keyArray);
     }
     Gameplay.populateBoard();
   }

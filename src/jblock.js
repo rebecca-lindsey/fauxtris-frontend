@@ -59,7 +59,6 @@ class jBlock extends FourRotation {
     blocksToRemove[topRow] = [centerIndex];
     blocksToAdd[topRow] = [leftIndex];
     blocksToAdd[centerRow] = [leftIndex, rightIndex];
-
     if (Gameplay.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "third";
