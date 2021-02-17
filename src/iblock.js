@@ -7,14 +7,16 @@ class iBlock extends TwoRotation {
 
   populateIBlock() {
     const blocksToAdd = {};
+    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
+
     for (let i = 3; i < 7; i++) {
-      const firstRowName = Object.keys(Gameplay.gameBoard)[0];
       if (blocksToAdd.hasOwnProperty(firstRowName)) {
         blocksToAdd[firstRowName].push(i);
       } else {
         blocksToAdd[firstRowName] = [i];
       }
     }
+
     this.updateBlocks(blocksToAdd);
     return blocksToAdd;
   }

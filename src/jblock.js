@@ -1,17 +1,26 @@
 class jBlock extends FourRotation {
   constructor(orientation) {
     super(orientation);
-    this.active = true;
+    this.activeBlocks = this.populateJBlock();
     Tetromino.activeBlock = this;
-    this.populateJBlock();
   }
 
   populateJBlock() {
+    const blocksToAdd = {};
+    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
+    const secondRowName = Object.keys(Gameplay.gameBoard)[1];
+
     for (let i = 3; i < 6; i++) {
-      Gameplay.gameBoard["tRow"][i] = "jBlock";
+      if (blocksToAdd.hasOwnProperty(firstRowName)) {
+        blocksToAdd[firstRowName].push(i);
+      } else {
+        blocksToAdd[firstRowName] = [i];
+      }
     }
-    Gameplay.gameBoard["sRow"][5] = "jBlock";
-    Gameplay.populateBoard();
+    blocksToAdd[secondRowName] = [5];
+
+    this.updateBlocks(blocksToAdd);
+    return blocksToAdd;
   }
 
   rotateFirst(activeBlocks, keys) {
