@@ -2,7 +2,6 @@ class iBlock extends TwoRotation {
   constructor(orientation) {
     super(orientation);
     this.activeBlocks = this.populateIBlock();
-    Tetromino.activeBlock = this;
   }
 
   populateIBlock() {

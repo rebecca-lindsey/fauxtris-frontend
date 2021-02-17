@@ -1,9 +1,9 @@
 class Tetromino {
   constructor() {
     this.orientation = "first";
-    Tetromino.activeBlock = this;
+    Tetromino.activeTetromino = this;
   }
-  static activeBlock;
+  static activeTetromino;
 
   static nextLetterRowUpwards(rowName) {
     if (rowName === Object.keys(Gameplay.gameBoard)[0]) {

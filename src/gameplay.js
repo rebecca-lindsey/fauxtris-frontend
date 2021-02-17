@@ -17,6 +17,7 @@ class Gameplay {
 
   static populateBoard() {
     Gameplay.clearBoard();
+
     for (const row in Gameplay.gameBoard) {
       for (const space of Gameplay.gameBoard[row]) {
         const newSpace = document.createElement("div");
@@ -59,45 +60,45 @@ class Gameplay {
   }
 
   static moveActivePiece(direction) {
-    const activeBlockObject = Gameplay.findActiveBlocks();
-    const keys = Object.keys(activeBlockObject);
-    const activeTetromino = Tetromino.activeBlock;
+    const activeBlocks = Tetromino.activeTetromino.activeBlocks;
+    const keys = Object.keys(activeBlocks);
+    const activeTetromino = Tetromino.activeTetromino;
 
     switch (direction) {
       case "left":
-        activeTetromino.moveLeft(activeBlockObject, keys);
+        activeTetromino.moveLeft(activeBlocks, keys);
         break;
       case "right":
-        activeTetromino.moveRight(activeBlockObject, keys);
+        activeTetromino.moveRight(activeBlocks, keys);
         break;
       case "down":
-        activeTetromino.moveDown(activeBlockObject, keys);
+        activeTetromino.moveDown(activeBlocks, keys);
         break;
       case "rotate":
         if (activeTetromino.constructor.name != "oBlock") {
-          activeTetromino.rotate(activeBlockObject, keys);
+          activeTetromino.rotate(activeBlocks, keys);
         }
         break;
     }
   }
 
-  static findActiveBlocks() {
-    const activeBlocks = {};
-    for (const row in Gameplay.gameBoard) {
-      if (Gameplay.gameBoard[row].some((item) => item != null)) {
-        Gameplay.gameBoard[row].forEach((value, index) => {
-          if (value == Tetromino.activeBlock.constructor.name) {
-            if (activeBlocks[row]) {
-              activeBlocks[row].push(index);
-            } else {
-              activeBlocks[row] = [index];
-            }
-          }
-        });
-      }
-    }
-    return activeBlocks;
-  }
+  // static findActiveBlocks() {
+  //   const activeBlocks = {};
+  //   for (const row in Gameplay.gameBoard) {
+  //     if (Gameplay.gameBoard[row].some((item) => item != null)) {
+  //       Gameplay.gameBoard[row].forEach((value, index) => {
+  //         if (value == Tetromino.activeBlock.constructor.name) {
+  //           if (activeBlocks[row]) {
+  //             activeBlocks[row].push(index);
+  //           } else {
+  //             activeBlocks[row] = [index];
+  //           }
+  //         }
+  //       });
+  //     }
+  //   }
+  //   return activeBlocks;
+  // }
 
   static validMove(blocksToAdd) {
     let boolean = true;
