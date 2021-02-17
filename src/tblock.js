@@ -1,17 +1,25 @@
 class tBlock extends FourRotation {
   constructor(orientation) {
     super(orientation);
-    this.active = true;
-    Tetromino.activeBlock = this;
-    this.populateTBlock();
+    this.activeBlocks = this.populateTBlock();
   }
 
   populateTBlock() {
+    const blocksToAdd = {};
+    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
+    const secondRowName = Object.keys(Gameplay.gameBoard)[1];
+
     for (let i = 3; i < 6; i++) {
-      Gameplay.gameBoard["tRow"][i] = "tBlock";
+      if (blocksToAdd.hasOwnProperty(firstRowName)) {
+        blocksToAdd[firstRowName].push(i);
+      } else {
+        blocksToAdd[firstRowName] = [i];
+      }
     }
-    Gameplay.gameBoard["sRow"][4] = "tBlock";
-    Gameplay.populateBoard();
+    blocksToAdd[secondRowName] = [4];
+
+    this.updateBlocks(blocksToAdd);
+    return blocksToAdd;
   }
 
   rotateFirst(activeBlocks, keys) {
