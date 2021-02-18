@@ -6,8 +6,8 @@ class sBlock extends TwoRotation {
 
   populateSBlock() {
     const blocksToAdd = {};
-    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
-    const secondRowName = Object.keys(Gameplay.gameBoard)[1];
+    const firstRowName = Object.keys(Gameplay.currentGame.board)[0];
+    const secondRowName = Object.keys(Gameplay.currentGame.board)[1];
 
     for (let i = 3; i < 6; i++) {
       switch (i) {
@@ -42,7 +42,7 @@ class sBlock extends TwoRotation {
     blocksToAdd[topRow] = [centerIndex];
     blocksToAdd[bottomRow] = [rightIndex];
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "second";
     }
@@ -63,7 +63,7 @@ class sBlock extends TwoRotation {
     blocksToRemove[topRow] = [centerIndex];
     blocksToAdd[bottomRow] = [leftIndex, centerIndex];
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "first";
     }
