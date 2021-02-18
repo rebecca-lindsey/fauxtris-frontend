@@ -91,6 +91,14 @@ nav button {
   outline: 0;
 }
 
+#game-overlay {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  width: 260px;
+  height: 510px;
+  z-index: 10;
+}
+
 #header {
   font-family: "Bungee", cursive;
   font-size: 50px;
