@@ -1,36 +1,42 @@
 class Gameplay {
-  static gameBoard = {};
-
-  static score = 0;
-
-  static createNewBoard() {
-    for (let i = 20; i > 0; i--) {
-      const rowName = `${String.fromCharCode(96 + i)}Row`;
-      Gameplay.gameBoard[rowName] = Array(10).fill(null);
-    }
-    Gameplay.populateBoard();
+  constructor() {
+    this.board = {};
+    this.score = 0;
+    Gameplay.currentGame = this;
+    this.createNewBoard();
   }
 
-  static clearBoard() {
+  static currentGame;
+
+  createNewBoard() {
+    debugger;
+    for (let i = 20; i > 0; i--) {
+      const rowName = `${String.fromCharCode(96 + i)}Row`;
+      this.board[rowName] = Array(10).fill(null);
+    }
+    this.populateBoard();
+  }
+
+  clearBoard() {
     document.getElementById("game-display").innerHTML = "";
   }
 
-  static populateBoard() {
-    Gameplay.clearBoard();
+  populateBoard() {
+    this.clearBoard();
 
-    for (const row in Gameplay.gameBoard) {
-      for (const space of Gameplay.gameBoard[row]) {
+    for (const row in this.board) {
+      for (const space of this.board[row]) {
         const newSpace = document.createElement("div");
         newSpace.classList.add("game-space");
         if (space) {
-          newSpace.classList.add(Gameplay.addColor(space));
+          newSpace.classList.add(addColor(space));
         }
         document.getElementById("game-display").append(newSpace);
       }
     }
   }
 
-  static generateNewBlock() {
+  generateNewBlock() {
     const randomNum = Math.floor(Math.random() * 7);
     const tetrominoArray = [
       iBlock,
@@ -44,7 +50,7 @@ class Gameplay {
     new tetrominoArray[randomNum]();
   }
 
-  static addColor(space) {
+  addColor(space) {
     const colorList = {
       iBlock: "i-block",
       oBlock: "o-block",
@@ -58,23 +64,23 @@ class Gameplay {
     return colorList[space];
   }
 
-  static handleArrowKey(key) {
+  handleArrowKey(key) {
     switch (key) {
       case "ArrowLeft":
-        Gameplay.moveActivePiece("left");
+        moveActivePiece("left");
         break;
       case "ArrowRight":
-        Gameplay.moveActivePiece("right");
+        moveActivePiece("right");
         break;
       case "ArrowDown":
-        Gameplay.moveActivePiece("down");
+        moveActivePiece("down");
         break;
       case " ":
-        Gameplay.moveActivePiece("rotate");
+        moveActivePiece("rotate");
     }
   }
 
-  static moveActivePiece(direction) {
+  moveActivePiece(direction) {
     const activeBlocks = Tetromino.activeTetromino.activeBlocks;
     const keys = Object.keys(activeBlocks);
     const activeTetromino = Tetromino.activeTetromino;
@@ -97,18 +103,14 @@ class Gameplay {
     }
   }
 
-  static validMove(blocksToAdd) {
+  validMove(blocksToAdd) {
     let boolean = true;
     for (const [row, indexes] of Object.entries(blocksToAdd)) {
       if (row === "invalidRow") {
         boolean = false;
       } else {
         indexes.forEach((index) => {
-          if (
-            Gameplay.gameBoard[row][index] != null ||
-            index < 0 ||
-            index > 9
-          ) {
+          if (this.board[row][index] != null || index < 0 || index > 9) {
             boolean = false;
           }
         });
@@ -119,24 +121,22 @@ class Gameplay {
 
   // FIXME: Make this dynamic to search entire board
 
-  static rowClear() {
-    const board = Gameplay.gameBoard;
-    if (board["aRow"].every((element) => element != null)) {
+  rowClear() {
+    if (this.board["aRow"].every((element) => element != null)) {
       for (let index = 0; index < 10; index++) {
-        board["aRow"][index] = "flash";
+        this.board["aRow"][index] = "flash";
       }
-      Gameplay.populateBoard();
+      this.populateBoard();
     }
-    setTimeout(Gameplay.rowDrop, 200);
+    setTimeout(rowDrop, 200);
   }
 
-  static rowDrop() {
-    const board = Gameplay.gameBoard;
-    const keyArray = Object.keys(board).sort();
+  rowDrop() {
+    const keyArray = Object.keys(this.board).sort();
     for (let i = 0; i < keyArray.length - 1; i++) {
-      board[keyArray[i]] = board[keyArray[i + 1]];
+      this.board[keyArray[i]] = this.board[keyArray[i + 1]];
     }
-    board[keyArray[keyArray.length - 1]] = Array(10).fill(null);
-    Gameplay.populateBoard();
+    this.board[keyArray[keyArray.length - 1]] = Array(10).fill(null);
+    this.populateBoard();
   }
 }

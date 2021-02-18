@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("game-display")
     .addEventListener("keydown", function (event) {
-      Gameplay.handleArrowKey(event.key);
+      Gameplay.currentGame.handleArrowKey(event.key);
     });
 
   document
@@ -25,7 +25,7 @@ function handleClick(event) {
       console.log("leaderboard");
       break;
     case "play":
-      console.log("play");
+      new Gameplay();
       break;
   }
 }
