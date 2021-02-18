@@ -6,8 +6,8 @@ class zBlock extends TwoRotation {
 
   populateZBlock() {
     const blocksToAdd = {};
-    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
-    const secondRowName = Object.keys(Gameplay.gameBoard)[1];
+    const firstRowName = Object.keys(Gameplay.currentGame.board)[0];
+    const secondRowName = Object.keys(Gameplay.currentGame.board)[1];
 
     for (let i = 3; i < 6; i++) {
       switch (i) {
@@ -43,7 +43,7 @@ class zBlock extends TwoRotation {
     blocksToAdd[topRow] = [rightIndex];
     blocksToAdd[centerRow] = [rightIndex];
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "second";
     }
@@ -64,7 +64,7 @@ class zBlock extends TwoRotation {
     blocksToAdd[centerRow] = [leftIndex];
     blocksToAdd[bottomRow] = [rightIndex];
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "first";
     }
