@@ -6,8 +6,8 @@ class jBlock extends FourRotation {
 
   populateJBlock() {
     const blocksToAdd = {};
-    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
-    const secondRowName = Object.keys(Gameplay.gameBoard)[1];
+    const firstRowName = Object.keys(Gameplay.currentGame.board)[0];
+    const secondRowName = Object.keys(Gameplay.currentGame.board)[1];
 
     for (let i = 3; i < 6; i++) {
       if (blocksToAdd.hasOwnProperty(firstRowName)) {
@@ -38,7 +38,7 @@ class jBlock extends FourRotation {
     blocksToAdd[bottomRow] = [leftIndex, centerIndex];
     blocksToAdd[topRow] = [centerIndex];
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "second";
     }
@@ -59,7 +59,7 @@ class jBlock extends FourRotation {
     blocksToRemove[topRow] = [centerIndex];
     blocksToAdd[topRow] = [leftIndex];
     blocksToAdd[centerRow] = [leftIndex, rightIndex];
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "third";
     }
@@ -81,7 +81,7 @@ class jBlock extends FourRotation {
     blocksToAdd[topRow] = [centerIndex, rightIndex];
     blocksToAdd[bottomRow] = [centerIndex];
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "fourth";
     }
@@ -103,7 +103,7 @@ class jBlock extends FourRotation {
     blocksToAdd[centerRow] = [leftIndex, rightIndex];
     blocksToAdd[bottomRow] = [rightIndex];
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.updateBlocks(blocksToAdd, blocksToRemove);
       this.orientation = "first";
     }
