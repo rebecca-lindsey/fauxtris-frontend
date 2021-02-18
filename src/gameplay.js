@@ -22,7 +22,7 @@ class Gameplay {
       for (const space of Gameplay.gameBoard[row]) {
         const newSpace = document.createElement("div");
         newSpace.classList.add("game-space");
-        if (space != null) {
+        if (space) {
           newSpace.classList.add(Gameplay.addColor(space));
         }
         document.getElementById("game-display").append(newSpace);
@@ -90,7 +90,7 @@ class Gameplay {
         activeTetromino.moveDown(activeBlocks, keys);
         break;
       case "rotate":
-        if (activeTetromino.constructor.name != "oBlock") {
+        if (activeTetromino.constructor.name !== "oBlock") {
           activeTetromino.rotate(activeBlocks, keys);
         }
         break;

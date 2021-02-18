@@ -15,6 +15,12 @@
 
 body {
   background-color: #3c6e71;
+  font-family: "Open Sans", sans-serif;
+}
+
+span {
+  margin: 0;
+  padding: 0;
 }
 
 .game-space {
@@ -60,6 +66,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
 
 #game-display {
@@ -73,4 +80,9 @@ body {
 
 #game-display:focus {
   outline: 0;
+}
+
+#header {
+  font-family: "Bungee", cursive;
+  font-size: 50px;
 }
