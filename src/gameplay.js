@@ -2,6 +2,7 @@ class Gameplay {
   constructor() {
     this.board = {};
     this.score = 0;
+    this.difficulty = "Medium";
     Gameplay.currentGame = this;
     this.createNewBoard();
     this.generateNewBlock();
@@ -48,6 +49,7 @@ class Gameplay {
       zBlock,
     ];
     new tetrominoArray[randomNum]();
+    Tetromino.activeTetromino.blockFall();
   }
 
   addColor(space) {
@@ -118,8 +120,6 @@ class Gameplay {
     }
     return boolean;
   }
-
-  // FIXME: Make this dynamic to search entire board
 
   rowClear() {
     let keys = Object.keys(Tetromino.activeTetromino.activeBlocks);

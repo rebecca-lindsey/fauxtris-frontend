@@ -4,6 +4,7 @@ class Tetromino {
     Tetromino.activeTetromino = this;
   }
   static activeTetromino;
+  static blockFallInterval;
 
   static nextLetterRowUpwards(rowName) {
     if (rowName === Object.keys(Gameplay.currentGame.board)[0]) {
@@ -112,5 +113,27 @@ class Tetromino {
     }
 
     this.updateBlocks(blocksToAdd, blocksToRemove);
+  }
+
+  blockFall() {
+    let speed;
+
+    switch (Gameplay.currentGame.difficulty) {
+      case "Easy":
+        speed = 1200;
+        break;
+      case "Medium":
+        speed = 800;
+        break;
+      case "Hard":
+        speed = 400;
+        break;
+    }
+
+    Tetromino.blockFallInterval = setInterval(() => {
+      const activeBlocks = Tetromino.activeTetromino.activeBlocks;
+      const keys = Object.keys(activeBlocks);
+      this.moveDown(activeBlocks, keys);
+    }, speed);
   }
 }
