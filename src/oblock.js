@@ -6,8 +6,8 @@ class oBlock extends Tetromino {
 
   populateOBlock() {
     const blocksToAdd = {};
-    const firstRowName = Object.keys(Gameplay.gameBoard)[0];
-    const secondRowName = Object.keys(Gameplay.gameBoard)[1];
+    const firstRowName = Object.keys(Gameplay.currentGame.board)[0];
+    const secondRowName = Object.keys(Gameplay.currentGame.board)[1];
 
     for (let i = 4; i < 6; i++) {
       if (blocksToAdd.hasOwnProperty(firstRowName)) {
