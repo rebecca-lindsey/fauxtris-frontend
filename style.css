@@ -25,7 +25,7 @@ nav {
   width: 250px;
 }
 
-nav button {
+button {
   font-family: "Bungee", cursive;
   font-size: 25px;
   color: #284b63;
@@ -93,10 +93,17 @@ nav button {
 
 #game-overlay {
   position: absolute;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(53, 53, 53, 0.6);
   width: 260px;
   height: 510px;
   z-index: 10;
+}
+
+#game-overlay button {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #header {
