@@ -26,6 +26,7 @@ function handleClick(event) {
       break;
     case "play":
       new Gameplay();
+      document.getElementById("game-overlay").classList.add("hide-element");
       break;
   }
 }

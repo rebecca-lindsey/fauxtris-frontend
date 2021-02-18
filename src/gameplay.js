@@ -66,16 +66,16 @@ class Gameplay {
   handleArrowKey(key) {
     switch (key) {
       case "ArrowLeft":
-        moveActivePiece("left");
+        this.moveActivePiece("left");
         break;
       case "ArrowRight":
-        moveActivePiece("right");
+        this.moveActivePiece("right");
         break;
       case "ArrowDown":
-        moveActivePiece("down");
+        this.moveActivePiece("down");
         break;
       case " ":
-        moveActivePiece("rotate");
+        this.moveActivePiece("rotate");
     }
   }
 

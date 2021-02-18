@@ -40,6 +40,10 @@ button {
   height: 25px;
 }
 
+.hide-element {
+  display: none;
+}
+
 .i-block {
   background-color: #04eaea;
 }

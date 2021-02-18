@@ -16,7 +16,7 @@ class FourRotation extends Tetromino {
         break;
     }
 
-    Gameplay.populateBoard();
+    Gameplay.currentGame.populateBoard();
   }
 }
 
@@ -28,6 +28,6 @@ class TwoRotation extends Tetromino {
     } else if (this.orientation == "second") {
       this.rotateSecond(activeBlocks, keyArray);
     }
-    Gameplay.populateBoard();
+    Gameplay.currentGame.populateBoard();
   }
 }
