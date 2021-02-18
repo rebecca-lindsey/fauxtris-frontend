@@ -4,6 +4,7 @@ class Gameplay {
     this.score = 0;
     Gameplay.currentGame = this;
     this.createNewBoard();
+    this.generateNewBlock();
   }
 
   static currentGame;
@@ -121,21 +122,45 @@ class Gameplay {
   // FIXME: Make this dynamic to search entire board
 
   rowClear() {
-    if (this.board["aRow"].every((element) => element != null)) {
-      for (let index = 0; index < 10; index++) {
-        this.board["aRow"][index] = "flash";
+    let keys = Object.keys(Tetromino.activeTetromino.activeBlocks);
+    for (const row of keys) {
+      if (this.board[row].every((element) => element != null)) {
+        for (let index = 0; index < 10; index++) {
+          this.board[row][index] = "flash";
+        }
+      } else {
+        keys = keys.filter((element) => element != row);
       }
-      this.populateBoard();
     }
-    setTimeout(rowDrop, 200);
+
+    this.populateBoard();
+    setTimeout(() => {
+      this.rowDrop(keys.sort());
+    }, 200);
   }
 
-  rowDrop() {
+  rowDrop(rowsToRemove = []) {
     const keyArray = Object.keys(this.board).sort();
-    for (let i = 0; i < keyArray.length - 1; i++) {
-      this.board[keyArray[i]] = this.board[keyArray[i + 1]];
+    const startingIndex = keyArray.indexOf(rowsToRemove[0]);
+
+    for (let i = startingIndex; i < keyArray.length; i++) {
+      let j = i + 1;
+      if (keyArray[j]) {
+        this.board[keyArray[i]] = this.board[keyArray[j]];
+      } else {
+        this.board[keyArray[i]] = Array(10).fill(null);
+      }
     }
-    this.board[keyArray[keyArray.length - 1]] = Array(10).fill(null);
+
+    rowsToRemove.shift();
+
+    if (rowsToRemove.length > 0) {
+      rowsToRemove = rowsToRemove.map((rowName) => {
+        return Tetromino.nextLetterRowDownwards(rowName);
+      });
+      this.rowDrop(rowsToRemove);
+    }
+
     this.populateBoard();
   }
 }
