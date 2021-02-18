@@ -9,7 +9,6 @@ class Gameplay {
   static currentGame;
 
   createNewBoard() {
-    debugger;
     for (let i = 20; i > 0; i--) {
       const rowName = `${String.fromCharCode(96 + i)}Row`;
       this.board[rowName] = Array(10).fill(null);
@@ -29,7 +28,7 @@ class Gameplay {
         const newSpace = document.createElement("div");
         newSpace.classList.add("game-space");
         if (space) {
-          newSpace.classList.add(addColor(space));
+          newSpace.classList.add(this.addColor(space));
         }
         document.getElementById("game-display").append(newSpace);
       }

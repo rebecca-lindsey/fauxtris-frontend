@@ -6,7 +6,7 @@ class Tetromino {
   static activeTetromino;
 
   static nextLetterRowUpwards(rowName) {
-    if (rowName === Object.keys(Gameplay.gameBoard)[0]) {
+    if (rowName === Object.keys(Gameplay.currentGame.board)[0]) {
       return "invalidRow";
     } else {
       return `${String.fromCharCode(rowName.charCodeAt(0) + 1)}Row`;
@@ -14,7 +14,7 @@ class Tetromino {
   }
 
   static nextLetterRowDownwards(rowName) {
-    if (rowName === Object.keys(Gameplay.gameBoard).slice(-1)[0]) {
+    if (rowName === Object.keys(Gameplay.currentGame.board).slice(-1)[0]) {
       return "invalidRow";
     } else {
       return `${String.fromCharCode(rowName.charCodeAt(0) - 1)}Row`;
@@ -26,7 +26,7 @@ class Tetromino {
 
     for (const row in blocksToAdd) {
       blocksToAdd[row].map((index) => {
-        Gameplay.gameBoard[row][index] = this.constructor.name;
+        Gameplay.currentGame.board[row][index] = this.constructor.name;
 
         if (activeBlocks != undefined) {
           if (activeBlocks.hasOwnProperty(row)) {
@@ -45,7 +45,7 @@ class Tetromino {
 
     for (const row in blocksToRemove) {
       blocksToRemove[row].map((index) => {
-        Gameplay.gameBoard[row][index] = null;
+        Gameplay.currentGame.board[row][index] = null;
 
         if (activeBlocks != undefined) {
           if (activeBlocks[row].length == 1) {
@@ -63,9 +63,9 @@ class Tetromino {
   updateBlocks(blocksToAdd, blocksToRemove = {}) {
     this.removeBlocks(blocksToRemove);
 
-    if (Gameplay.validMove(blocksToAdd)) {
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.addBlocks(blocksToAdd);
-      Gameplay.populateBoard();
+      Gameplay.currentGame.populateBoard();
     } else {
       this.addBlocks(blocksToRemove);
     }
