@@ -35,5 +35,27 @@ function handleClick(event) {
 function fetchLeaderboard() {
   fetch("http://127.0.0.1:3000/difficulty.json")
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => displayScores(data));
+}
+
+// function displayLeaderboard(scores) {
+//   const overlayDiv = document.getElementById("game-overlay");
+//   overlayDiv.classList.remove("hide-element");
+//   overlayDiv.innerHTML = displayScores(scores);
+// }
+
+function displayScores(scoreObj) {
+  const overlayDiv = document.getElementById("game-overlay");
+  overlayDiv.classList.remove("hide-element");
+  const ul = document.createElement("ul");
+  for (const difficulty of scoreObj) {
+    ul.innerHTML += difficulty.level;
+    for (const score of difficulty.scores) {
+      const li = document.createElement("li");
+      li.innerText = `${score.points} - ${score.initials}`;
+      ul.append(li);
+    }
+  }
+  console.log(ul);
+  overlayDiv.innerHTML = ul.innerHTML;
 }
