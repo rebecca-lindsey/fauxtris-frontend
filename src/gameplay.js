@@ -41,7 +41,6 @@ class Gameplay {
   gameover() {
     this.stopGame();
     this.displayLastBlock();
-    console.log("Gameover!");
   }
 
   stopGame() {
@@ -75,6 +74,10 @@ class Gameplay {
       zBlock,
     ];
     new tetrominoArray[randomNum]();
+    setTimeout(() => {
+      this.freeze = false;
+    }, 500);
+    this.populateBoard();
     Tetromino.activeTetromino.blockFall();
   }
 
@@ -203,13 +206,15 @@ class Gameplay {
       this.rowDrop(rowsToRemove);
     } else {
       this.populateBoard();
-      this.generateNewBlock();
     }
   }
 
-  checkForLoss(blocksToRemove) {
-    if (blocksToRemove.hasOwnProperty("tRow")) {
-      this.gameOver();
+  checkForLoss(blocksToAdd, blocksToRemove) {
+    if (
+      blocksToAdd.hasOwnProperty("invalidRow") &&
+      blocksToRemove.hasOwnProperty("tRow")
+    ) {
+      this.gameover();
       return true;
     } else {
       return false;

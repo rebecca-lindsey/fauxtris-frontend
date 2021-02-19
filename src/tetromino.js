@@ -102,23 +102,23 @@ class Tetromino {
   }
 
   updateBlocksOnMoveDown(blocksToAdd, blocksToRemove) {
+    Gameplay.currentGame.freeze = true;
     this.removeBlocks(blocksToRemove);
     if (Gameplay.currentGame.validMove(blocksToAdd)) {
       this.addBlocks(blocksToAdd);
       Gameplay.currentGame.populateBoard();
     } else {
-      Gameplay.currentGame.freeze = true;
       this.addBlocks(blocksToRemove);
-      if (Gameplay.currentGame.checkForLoss(blocksToRemove)) {
+      if (Gameplay.currentGame.checkForLoss(blocksToAdd, blocksToRemove)) {
         Gameplay.currentGame.gameover();
       } else {
         if (Gameplay.currentGame.checkForClearedRow()) {
           Gameplay.currentGame.rowClear();
-        } else {
-          Gameplay.currentGame.generateNewBlock();
         }
+        Gameplay.currentGame.generateNewBlock();
       }
     }
+    Gameplay.currentGame.freeze = false;
   }
 
   moveDown(activeBlocks, keys) {
@@ -156,7 +156,5 @@ class Tetromino {
       const keys = Object.keys(activeBlocks);
       this.moveDown(activeBlocks, keys);
     }, speed);
-
-    Gameplay.currentGame.freeze = false;
   }
 }

@@ -20,7 +20,6 @@ function handleClick(event) {
       document.getElementById("game-overlay").classList.add("hide-element");
       break;
     case "instructions":
-      console.log("instructions");
       changeButtonToGame(event.target.id);
       break;
     case "leaderboard":
