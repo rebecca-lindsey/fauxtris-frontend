@@ -163,4 +163,23 @@ class Gameplay {
 
     this.populateBoard();
   }
+
+  checkForLoss(blocksToAdd) {
+    if (
+      blocksToAdd.hasOwnProperty("invalidRow") &&
+      !!blocksToAdd.hasOwnProperty("aRow")
+    ) {
+      if (
+        blocksToAdd.hasOwnProperty("tRow") ||
+        Object.keys(blocksToAdd).length === 1
+      ) {
+        console.log("Gameover!");
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }

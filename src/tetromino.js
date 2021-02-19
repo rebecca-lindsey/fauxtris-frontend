@@ -24,7 +24,6 @@ class Tetromino {
 
   addBlocks(blocksToAdd) {
     const activeBlocks = Tetromino.activeTetromino.activeBlocks;
-
     for (const row in blocksToAdd) {
       blocksToAdd[row].map((index) => {
         Gameplay.currentGame.board[row][index] = this.constructor.name;
@@ -102,6 +101,20 @@ class Tetromino {
     this.updateBlocks(blocksToAdd, blocksToRemove);
   }
 
+  updateBlocksOnMoveDown(blocksToAdd, blocksToRemove) {
+    this.removeBlocks(blocksToRemove);
+    if (Gameplay.currentGame.validMove(blocksToAdd)) {
+      this.addBlocks(blocksToAdd);
+      Gameplay.currentGame.populateBoard();
+    } else {
+      this.addBlocks(blocksToRemove);
+      if (Gameplay.currentGame.checkForLoss(blocksToAdd)) {
+      } else {
+        Gameplay.currentGame.generateNewBlock();
+      }
+    }
+  }
+
   moveDown(activeBlocks, keys) {
     const blocksToRemove = {};
     const blocksToAdd = {};
@@ -112,10 +125,12 @@ class Tetromino {
         activeBlocks[keys[i]];
     }
 
-    this.updateBlocks(blocksToAdd, blocksToRemove);
+    this.updateBlocksOnMoveDown(blocksToAdd, blocksToRemove);
   }
 
   blockFall() {
+    clearInterval(Tetromino.blockFallInterval);
+
     let speed;
 
     switch (Gameplay.currentGame.difficulty) {
