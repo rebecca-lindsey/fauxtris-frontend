@@ -43,13 +43,15 @@ function displayScores(scoreObj) {
   overlayDiv.classList.remove("hide-element");
   overlayDiv.innerHTML = "";
   for (const difficulty of scoreObj) {
+    const div = document.createElement("div");
+    div.innerHTML = `<p class="list-header">${difficulty.level}</p>`;
     const ul = document.createElement("ul");
-    ul.innerHTML = difficulty.level;
     for (const score of difficulty.scores) {
       const li = document.createElement("li");
       li.innerText = `${score.points} - ${score.initials}`;
       ul.append(li);
     }
-    overlayDiv.append(ul);
+    div.append(ul);
+    overlayDiv.append(div);
   }
 }

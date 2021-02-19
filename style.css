@@ -18,6 +18,10 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+li {
+  list-style: none;
+}
+
 nav {
   display: flex;
   flex-direction: column;
@@ -42,6 +46,10 @@ button {
 
 .hide-element {
   display: none;
+}
+
+.list-header {
+  text-decoration: underline;
 }
 
 .i-block {
@@ -107,6 +115,8 @@ button {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #game-overlay button {
@@ -114,6 +124,11 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#game-overlay div {
+  color: #fffafa;
+  padding: 5px 0 5px 0;
 }
 
 #header {
