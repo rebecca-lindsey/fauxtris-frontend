@@ -110,7 +110,7 @@ class Tetromino {
     } else {
       this.addBlocks(blocksToRemove);
       Gameplay.currentGame.freeze = true;
-      if (Gameplay.currentGame.checkForLoss(blocksToAdd)) {
+      if (Gameplay.currentGame.checkForLoss(blocksToRemove)) {
         console.log("Gameover!");
       } else {
         if (Gameplay.currentGame.checkForClearedRow()) {

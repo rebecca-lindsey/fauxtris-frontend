@@ -38,6 +38,11 @@ class Gameplay {
     }
   }
 
+  stopGame() {
+    clearInterval(Tetromino.blockFallInterval);
+    console.log("Game is stopped");
+  }
+
   generateNewBlock() {
     const randomNum = Math.floor(Math.random() * 7);
     const tetrominoArray = [
@@ -179,20 +184,10 @@ class Gameplay {
     this.generateNewBlock();
   }
 
-  checkForLoss(blocksToAdd) {
-    if (
-      blocksToAdd.hasOwnProperty("invalidRow") &&
-      !!blocksToAdd.hasOwnProperty("aRow")
-    ) {
-      if (
-        blocksToAdd.hasOwnProperty("tRow") ||
-        Object.keys(blocksToAdd).length === 1
-      ) {
-        console.log("Gameover!");
-        return true;
-      } else {
-        return false;
-      }
+  checkForLoss(blocksToRemove) {
+    if (blocksToRemove.hasOwnProperty("tRow")) {
+      this.stopGame();
+      return true;
     } else {
       return false;
     }
