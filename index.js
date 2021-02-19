@@ -23,11 +23,17 @@ function handleClick(event) {
       console.log("instructions");
       break;
     case "leaderboard":
-      console.log("leaderboard");
+      fetchLeaderboard();
       break;
     case "play":
       new Gameplay();
       document.getElementById("game-overlay").classList.add("hide-element");
       break;
   }
+}
+
+function fetchLeaderboard() {
+  fetch("http://127.0.0.1:3000/difficulty.json")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 }
