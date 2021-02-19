@@ -3,6 +3,7 @@ class Gameplay {
     this.board = {};
     this.score = 0;
     this.difficulty = "Medium";
+    this.freeze = false;
     Gameplay.currentGame = this;
     this.createNewBoard();
     this.generateNewBlock();
@@ -67,18 +68,20 @@ class Gameplay {
   }
 
   handleArrowKey(key) {
-    switch (key) {
-      case "ArrowLeft":
-        this.moveActivePiece("left");
-        break;
-      case "ArrowRight":
-        this.moveActivePiece("right");
-        break;
-      case "ArrowDown":
-        this.moveActivePiece("down");
-        break;
-      case " ":
-        this.moveActivePiece("rotate");
+    if (!this.freeze) {
+      switch (key) {
+        case "ArrowLeft":
+          this.moveActivePiece("left");
+          break;
+        case "ArrowRight":
+          this.moveActivePiece("right");
+          break;
+        case "ArrowDown":
+          this.moveActivePiece("down");
+          break;
+        case " ":
+          this.moveActivePiece("rotate");
+      }
     }
   }
 
@@ -116,6 +119,17 @@ class Gameplay {
             boolean = false;
           }
         });
+      }
+    }
+    return boolean;
+  }
+
+  checkForClearedRow() {
+    let keys = Object.keys(Tetromino.activeTetromino.activeBlocks);
+    let boolean = false;
+    for (const row of keys) {
+      if (this.board[row].every((element) => element != null)) {
+        boolean = true;
       }
     }
     return boolean;
@@ -162,6 +176,7 @@ class Gameplay {
     }
 
     this.populateBoard();
+    this.generateNewBlock();
   }
 
   checkForLoss(blocksToAdd) {
