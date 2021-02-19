@@ -40,7 +40,16 @@ class Gameplay {
 
   stopGame() {
     clearInterval(Tetromino.blockFallInterval);
-    console.log("Game is stopped");
+    this.displayLastBlock();
+  }
+
+  displayLastBlock() {
+    for (const row in Tetromino.activeTetromino.activeBlocks) {
+      Tetromino.activeTetromino.activeBlocks[row].forEach((index) => {
+        Gameplay.currentGame.board[row][index] = "losingBlock";
+      });
+    }
+    Gameplay.currentGame.populateBoard();
   }
 
   generateNewBlock() {
@@ -68,6 +77,7 @@ class Gameplay {
       jBlock: "j-block",
       lBlock: "l-block",
       flash: "flash",
+      losingBlock: "losing-Block",
     };
     return colorList[space];
   }
