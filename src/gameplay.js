@@ -169,6 +169,8 @@ class Gameplay {
   }
 
   rowDrop(rowsToRemove = []) {
+    this.addToScore();
+
     const keyArray = Object.keys(this.board).sort();
     const startingIndex = keyArray.indexOf(rowsToRemove[0]);
 
@@ -188,10 +190,10 @@ class Gameplay {
         return Tetromino.nextLetterRowDownwards(rowName);
       });
       this.rowDrop(rowsToRemove);
+    } else {
+      this.populateBoard();
+      this.generateNewBlock();
     }
-
-    this.populateBoard();
-    this.generateNewBlock();
   }
 
   checkForLoss(blocksToRemove) {
@@ -201,5 +203,9 @@ class Gameplay {
     } else {
       return false;
     }
+  }
+
+  addToScore() {
+    this.score += 10;
   }
 }
