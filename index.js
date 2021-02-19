@@ -38,24 +38,18 @@ function fetchLeaderboard() {
     .then((data) => displayScores(data));
 }
 
-// function displayLeaderboard(scores) {
-//   const overlayDiv = document.getElementById("game-overlay");
-//   overlayDiv.classList.remove("hide-element");
-//   overlayDiv.innerHTML = displayScores(scores);
-// }
-
 function displayScores(scoreObj) {
   const overlayDiv = document.getElementById("game-overlay");
   overlayDiv.classList.remove("hide-element");
-  const ul = document.createElement("ul");
+  overlayDiv.innerHTML = "";
   for (const difficulty of scoreObj) {
-    ul.innerHTML += difficulty.level;
+    const ul = document.createElement("ul");
+    ul.innerHTML = difficulty.level;
     for (const score of difficulty.scores) {
       const li = document.createElement("li");
       li.innerText = `${score.points} - ${score.initials}`;
       ul.append(li);
     }
+    overlayDiv.append(ul);
   }
-  console.log(ul);
-  overlayDiv.innerHTML = ul.innerHTML;
 }
