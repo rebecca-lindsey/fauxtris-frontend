@@ -38,10 +38,18 @@ class Gameplay {
     }
   }
 
-  stopGame() {
-    clearInterval(Tetromino.blockFallInterval);
+  gameover() {
+    this.stopGame();
     this.displayLastBlock();
     console.log("Gameover!");
+  }
+
+  stopGame() {
+    clearInterval(Tetromino.blockFallInterval);
+  }
+
+  continueGame() {
+    Tetromino.activeTetromino.blockFall();
   }
 
   displayLastBlock() {
@@ -201,7 +209,7 @@ class Gameplay {
 
   checkForLoss(blocksToRemove) {
     if (blocksToRemove.hasOwnProperty("tRow")) {
-      this.stopGame();
+      this.gameOver();
       return true;
     } else {
       return false;

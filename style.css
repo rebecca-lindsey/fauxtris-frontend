@@ -44,10 +44,6 @@ button {
   height: 25px;
 }
 
-.hide-element {
-  display: none;
-}
-
 .list-header {
   text-decoration: underline;
 }
@@ -108,7 +104,7 @@ button {
 
 #game-overlay {
   position: absolute;
-  background: rgba(53, 53, 53, 0.6);
+  background: rgb(53, 53, 53);
   width: 260px;
   height: 510px;
   z-index: 10;
@@ -117,6 +113,10 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+}
+
+#game-overlay.hide-element {
+  display: none;
 }
 
 #game-overlay button {
