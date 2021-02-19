@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function handleClick(event) {
   switch (event.target.id) {
     case "new-game":
-      console.log("new game");
+      new Gameplay();
+      document.getElementById("game-overlay").classList.add("hide-element");
       break;
     case "instructions":
       console.log("instructions");

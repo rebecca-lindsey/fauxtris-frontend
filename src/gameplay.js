@@ -41,6 +41,7 @@ class Gameplay {
   stopGame() {
     clearInterval(Tetromino.blockFallInterval);
     this.displayLastBlock();
+    console.log("Gameover!");
   }
 
   displayLastBlock() {
@@ -51,6 +52,8 @@ class Gameplay {
     }
     Gameplay.currentGame.populateBoard();
   }
+
+  // BUG: Correct multi-block generation bug
 
   generateNewBlock() {
     const randomNum = Math.floor(Math.random() * 7);

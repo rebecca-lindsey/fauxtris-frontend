@@ -2,7 +2,6 @@ class Tetromino {
   constructor() {
     this.orientation = "first";
     Tetromino.activeTetromino = this;
-    Gameplay.currentGame.freeze = false;
   }
   static activeTetromino;
   static blockFallInterval;
@@ -108,10 +107,10 @@ class Tetromino {
       this.addBlocks(blocksToAdd);
       Gameplay.currentGame.populateBoard();
     } else {
-      this.addBlocks(blocksToRemove);
       Gameplay.currentGame.freeze = true;
+      this.addBlocks(blocksToRemove);
       if (Gameplay.currentGame.checkForLoss(blocksToRemove)) {
-        console.log("Gameover!");
+        Gameplay.currentGame.stopGame();
       } else {
         if (Gameplay.currentGame.checkForClearedRow()) {
           Gameplay.currentGame.rowClear();
@@ -157,5 +156,7 @@ class Tetromino {
       const keys = Object.keys(activeBlocks);
       this.moveDown(activeBlocks, keys);
     }, speed);
+
+    Gameplay.currentGame.freeze = false;
   }
 }
