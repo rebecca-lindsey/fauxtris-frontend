@@ -16,6 +16,7 @@ function handleClick(id) {
   switch (id) {
     case "new-game":
       new Gameplay();
+      returnButtonToOriginal();
       document.getElementById("game-overlay").classList.add("hide-element");
       break;
     case "how-to-play":
@@ -31,7 +32,7 @@ function handleClick(id) {
       document.getElementById("game-overlay").classList.add("hide-element");
       break;
     case "return-to-game":
-      returnButtonToOriginal(id);
+      returnButtonToOriginal();
       returnToGame();
       break;
   }
@@ -98,8 +99,11 @@ function changeButtonToGame(id) {
   }
 }
 
-function returnButtonToOriginal(btnId) {
-  const button = document.getElementById(btnId);
+function returnButtonToOriginal() {
+  const button = document.getElementById("return-to-game");
+  if (!button) {
+    return;
+  }
   const buttonArray = [...document.getElementById("side-navigation").children];
   if (buttonArray.find((name) => name.id === "how-to-play")) {
     button.id = "leaderboard";
