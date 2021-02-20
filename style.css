@@ -125,10 +125,7 @@ button {
 }
 
 #game-overlay button {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 232px;
 }
 
 #game-overlay div {
