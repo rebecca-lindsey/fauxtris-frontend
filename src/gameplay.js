@@ -230,8 +230,29 @@ class Gameplay {
     const gameOverlay = document.getElementById("game-overlay");
     gameOverlay.classList.add("transparent-background");
     gameOverlay.innerHTML = `<h2>Gameover!</h2>`;
-    checkForHighScore();
+    this.handleScore();
   }
 
-  checkForHighScore() {}
+  handleScore() {
+    const difficultyLevel = Difficulty.allDifficulties.find(
+      (difficulty) => difficulty.level === this.difficulty
+    );
+    const lowerScore = difficultyLevel.scores.find(
+      (score) => parseInt(score) < this.score
+    );
+    if (lowerScore) {
+      this.addNewHighScore(difficultyLevel, lowerScore);
+    } else {
+      showLowScore();
+    }
+  }
+
+  addNewHighScore(difficultyLevel, lowerScore) {
+    const index = difficultyLevel.scores.indexOf(lowerScore);
+    const input = `${this.score} - ${this.initials}`;
+    difficultyLevel.scores.splice(index, 0, input);
+    const scoreToRemove = difficultyLevel.scores.pop();
+    displayHighScores(difficultyLevel);
+    difficultyLevel.updateDatabase(input, scoreToRemove);
+  }
 }

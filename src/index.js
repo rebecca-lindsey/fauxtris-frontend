@@ -58,10 +58,11 @@ function createDifficultyScores(scoreObj) {
   console.log("difficulty scores");
   for (const difficulty of scoreObj) {
     const scoreArray = [];
+    const id = difficulty.scores[0].difficulty_id;
     for (const score of difficulty.scores) {
       scoreArray.push(`${score.points} - ${score.initials}`);
     }
-    new Difficulty(difficulty.level, scoreArray);
+    new Difficulty(difficulty.level, scoreArray, id);
   }
 }
 
@@ -77,14 +78,22 @@ function clearContentAndAddFlex() {
   document.getElementById("game-overlay").innerHTML = "";
 }
 
-function displayHighScores() {
+function displayHighScores(difficulty = null) {
   if (Gameplay.currentGame) {
     Gameplay.currentGame.stopGame();
   }
 
   clearContentAndAddFlex();
 
-  for (const difficulty of Difficulty.allDifficulties) {
+  let difficulties = [];
+
+  if (difficulty) {
+    difficulties.push(difficulty);
+  } else {
+    difficulties = Difficulty.allDifficulties;
+  }
+
+  for (const difficulty of difficulties) {
     const div = document.createElement("div");
     div.innerHTML = `<p class="list-header">${difficulty.level}</p>`;
     const ul = document.createElement("ul");
