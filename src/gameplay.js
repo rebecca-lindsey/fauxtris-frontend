@@ -227,7 +227,7 @@ class Gameplay {
   }
 
   showLossScreen() {
-    clearContentAndAddFlex();
+    clearOverlayContentAndAddFlex();
     const gameOverlay = document.getElementById("game-overlay");
     gameOverlay.classList.add("transparent-background");
     this.handleScore();

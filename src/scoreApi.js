@@ -7,7 +7,6 @@ class ScoreApi {
   }
 
   static addNewScoreToDatabase(scoreToAdd) {
-    debugger;
     let configObj = {
       method: "POST",
       headers: {
