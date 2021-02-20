@@ -58,14 +58,14 @@ function fetchLeaderboard() {
 }
 
 function createDifficultyScores(scoreObj) {
-  console.log("difficulty scores");
   for (const difficulty of scoreObj) {
     const scoreArray = [];
-    const id = difficulty.scores[0].difficulty_id;
     for (const score of difficulty.scores) {
-      scoreArray.push(`${score.points} - ${score.initials}`);
+      scoreArray.push(
+        new Score(score.points, score.initials, score.id, score.difficulty_id)
+      );
     }
-    new Difficulty(difficulty.level, scoreArray, id);
+    new Difficulty(difficulty.level, scoreArray, difficulty.id);
   }
 }
 
@@ -102,7 +102,7 @@ function displayHighScores(difficulty = null) {
     const ul = document.createElement("ul");
     for (const score of difficulty.scores) {
       const li = document.createElement("li");
-      li.innerText = score;
+      li.innerText = `${score.points} - ${score.initials}`;
       ul.append(li);
     }
     div.append(ul);

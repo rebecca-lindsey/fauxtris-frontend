@@ -237,7 +237,7 @@ class Gameplay {
       (difficulty) => difficulty.level === this.difficulty
     );
     const lowerScore = difficultyLevel.scores.find(
-      (score) => parseInt(score) < this.score
+      (score) => score.points < this.score
     );
     if (lowerScore) {
       this.displaySuccess();
