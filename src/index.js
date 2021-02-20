@@ -35,15 +35,15 @@ function handleClick(id) {
       break;
     case "easy":
       new Gameplay("Easy");
-      clearContentAndRemoveFlex();
+      clearOverlayContentAndRemoveFlex();
       break;
     case "medium":
       new Gameplay("Medium");
-      clearContentAndRemoveFlex();
+      clearOverlayContentAndRemoveFlex();
       break;
     case "hard":
       new Gameplay("Hard");
-      clearContentAndRemoveFlex();
+      clearOverlayContentAndRemoveFlex();
       break;
     case "score-submit":
       const initials = document.getElementById("initials").value.toUpperCase();
@@ -51,25 +51,13 @@ function handleClick(id) {
   }
 }
 
-function createDifficultyScores(scoreObj) {
-  for (const difficulty of scoreObj) {
-    const scoreArray = [];
-    for (const score of difficulty.scores) {
-      scoreArray.push(
-        new Score(score.points, score.initials, score.id, score.difficulty_id)
-      );
-    }
-    new Difficulty(difficulty.level, scoreArray, difficulty.id);
-  }
-}
-
-function clearContentAndRemoveFlex() {
+function clearOverlayContentAndRemoveFlex() {
   document.getElementById("game-overlay").classList.remove("show-flex-element");
   document.getElementById("game-overlay").classList.add("hide-element");
   document.getElementById("game-overlay").innerHTML = "";
 }
 
-function clearContentAndAddFlex() {
+function clearOverlayContentAndAddFlex() {
   document.getElementById("game-overlay").classList.add("show-flex-element");
   document.getElementById("game-overlay").classList.remove("hide-element");
   document.getElementById("game-overlay").innerHTML = "";
@@ -80,7 +68,7 @@ function displayHighScores(difficulty = null) {
     Gameplay.currentGame.stopGame();
   }
 
-  clearContentAndAddFlex();
+  clearOverlayContentAndAddFlex();
 
   let difficulties = [];
 
@@ -108,7 +96,7 @@ function displayHowToPlay() {
   if (Gameplay.currentGame) {
     Gameplay.currentGame.stopGame();
   }
-  clearContentAndAddFlex();
+  clearOverlayContentAndAddFlex();
 
   document.getElementById(
     "game-overlay"
@@ -128,7 +116,7 @@ function displayHowToPlay() {
 }
 
 function returnToGame() {
-  clearContentAndRemoveFlex();
+  clearOverlayContentAndRemoveFlex();
   Gameplay.currentGame.continueGame();
 }
 
@@ -170,7 +158,7 @@ function returnButtonToOriginal() {
 }
 
 function selectDifficulty() {
-  clearContentAndAddFlex();
+  clearOverlayContentAndAddFlex();
   document.getElementById(
     "game-overlay"
   ).innerHTML = `<div id="difficulty-buttons">
