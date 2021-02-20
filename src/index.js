@@ -24,7 +24,7 @@ function handleClick(id) {
       break;
     case "leaderboard":
       changeButtonToGame(id);
-      fetchLeaderboard();
+      displayHighScores();
       break;
     case "play":
       selectDifficulty();
@@ -55,6 +55,7 @@ function fetchLeaderboard() {
 }
 
 function createDifficultyScores(scoreObj) {
+  console.log("difficulty scores");
   for (const difficulty of scoreObj) {
     const scoreArray = [];
     for (const score of difficulty.scores) {
@@ -76,20 +77,20 @@ function clearContentAndAddFlex() {
   document.getElementById("game-overlay").innerHTML = "";
 }
 
-function displayHighScores(scoreObj) {
+function displayHighScores() {
   if (Gameplay.currentGame) {
     Gameplay.currentGame.stopGame();
   }
 
   clearContentAndAddFlex();
 
-  for (const difficulty of scoreObj) {
+  for (const difficulty of Difficulty.allDifficulties) {
     const div = document.createElement("div");
     div.innerHTML = `<p class="list-header">${difficulty.level}</p>`;
     const ul = document.createElement("ul");
     for (const score of difficulty.scores) {
       const li = document.createElement("li");
-      li.innerText = `${score.points} - ${score.initials}`;
+      li.innerText = score;
       ul.append(li);
     }
     div.append(ul);
