@@ -10,7 +10,7 @@ class Difficulty {
 
   updateDatabase(newScore, newInitials, scoreToRemove) {
     this.addNewScoreToDatabase(newScore, newInitials);
-    this.removeScoreFromDatabase(scoreToRemove);
+    // this.removeScoreFromDatabase(scoreToRemove);
   }
 
   addNewScoreToDatabase(score, initials) {
