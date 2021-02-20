@@ -262,17 +262,8 @@ class Gameplay {
   }
 
   displaySuccess() {
-    const gameOverlay = document.getElementById("game-overlay");
-    gameOverlay.classList.add("display-flex-element");
-    gameOverlay.classList.add("transparent-background");
-    gameOverlay.innerHTML = `<div id="new-high-score">
-    <h2>New High Score!</h2>
-    <form action="" method="post">
-    <input id="initials" type="text" name="initials" maxlength="3" size="4" pattern="[a-zA-Z]">
-    <p>Please enter your initials above</p>
-    <input type="submit" id="score-submit" value="Save your score">
-    </form>
-    </div>`;
+    document.getElementById("new-high-score").classList.remove("hide-element");
+    document.getElementById("new-high-score").classList.add("show-element");
 
     document.getElementById("initials").addEventListener("keydown", (event) => {
       if (event.key.match(/[a-zA-Z]+/g)) {

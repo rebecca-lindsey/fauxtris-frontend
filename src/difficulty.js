@@ -8,8 +8,9 @@ class Difficulty {
 
   static allDifficulties = [];
 
-  updateDatabase(score, initials, scoreToRemove) {
-    this.addNewScoreToDatabase(score, initials);
+  updateDatabase(newScore, newInitials, scoreToRemove) {
+    this.addNewScoreToDatabase(newScore, newInitials);
+    this.removeScoreFromDatabase(scoreToRemove);
   }
 
   addNewScoreToDatabase(score, initials) {
@@ -25,8 +26,11 @@ class Difficulty {
         difficulty_id: this.id,
       }),
     };
+
     fetch("http://127.0.0.1:3000/score", configObj)
       .then((response) => response.json())
       .then((data) => console.log(data));
   }
+
+  removeScoreFromDatabase(scoreToRemove) {}
 }

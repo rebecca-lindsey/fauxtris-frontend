@@ -45,7 +45,7 @@ input[type="text"] {
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px dashed #fffafa;
+  border-bottom: 1px solid #fffafa;
   color: #fffafa;
   align-self: center;
 }
@@ -135,12 +135,14 @@ form {
   color: #fffafa;
   width: 260px;
   height: 510px;
-  z-index: 10;
+  z-index: 9;
 }
 
 #new-high-score {
+  position: absolute;
   text-align: center;
-  margin-top: 20px;
+  color: #fffafa;
+  z-index: 10;
 }
 
 .hide-element {
