@@ -41,6 +41,7 @@ class Gameplay {
   gameover() {
     this.stopGame();
     this.displayLastBlock();
+    this.showLossScreen();
   }
 
   stopGame() {
@@ -222,5 +223,13 @@ class Gameplay {
 
   displayCurrentScore() {
     document.getElementById("current-score").innerHTML = this.score;
+  }
+
+  showLossScreen() {
+    clearContentAndAddFlex();
+    const gameOverlay = document.getElementById("game-overlay");
+    gameOverlay.classList.add("transparent-background");
+    gameOverlay.innerHTML = `<h2>Gameover!</h2>`;
+    checkForHighScore();
   }
 }

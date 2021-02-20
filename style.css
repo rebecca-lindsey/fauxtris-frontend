@@ -116,7 +116,6 @@ button {
 
 #game-overlay {
   position: absolute;
-  background: rgb(53, 53, 53);
   color: #fffafa;
   width: 260px;
   height: 510px;
@@ -133,6 +132,14 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+}
+
+.solid-background {
+  background: rgb(53, 53, 53);
+}
+
+.transparent-background {
+  background: rgba(53, 53, 53, 0.5);
 }
 
 .show-element {
