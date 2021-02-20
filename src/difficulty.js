@@ -2,8 +2,9 @@ class Difficulty {
   constructor(level, scoreArray) {
     this.level = level;
     this.scores = scoreArray;
-    Difficulty.allDifficulties = this;
+    Difficulty.allDifficulties.push(this);
+    debugger;
   }
 
-  static allDifficulties;
+  static allDifficulties = [];
 }

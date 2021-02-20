@@ -51,7 +51,17 @@ function handleClick(id) {
 function fetchLeaderboard() {
   fetch("http://127.0.0.1:3000/difficulty.json")
     .then((response) => response.json())
-    .then((data) => displayHighScores(data));
+    .then((data) => createDifficultyScores(data));
+}
+
+function createDifficultyScores(scoreObj) {
+  for (const difficulty of scoreObj) {
+    const scoreArray = [];
+    for (const score of difficulty.scores) {
+      scoreArray.push(`${score.points} - ${score.initials}`);
+    }
+    new Difficulty(difficulty.level, scoreArray);
+  }
 }
 
 function clearContentAndRemoveFlex() {
