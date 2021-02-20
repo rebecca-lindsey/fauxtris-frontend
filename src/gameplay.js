@@ -1,8 +1,8 @@
 class Gameplay {
-  constructor() {
+  constructor(difficulty) {
     this.board = {};
     this.score = 0;
-    this.difficulty = "Medium";
+    this.difficulty = difficulty;
     this.freeze = false;
     Gameplay.currentGame = this;
     this.createNewBoard();

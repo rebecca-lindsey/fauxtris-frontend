@@ -15,9 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
 function handleClick(id) {
   switch (id) {
     case "new-game":
-      new Gameplay();
+      // new Gameplay();
       returnButtonToOriginal();
-      document.getElementById("game-overlay").classList.add("hide-element");
+      selectDifficulty();
+      // document.getElementById("game-overlay").classList.add("hide-element");
       break;
     case "how-to-play":
       changeButtonToGame(id);
@@ -28,8 +29,9 @@ function handleClick(id) {
       fetchLeaderboard();
       break;
     case "play":
-      new Gameplay();
-      document.getElementById("game-overlay").classList.add("hide-element");
+      // new Gameplay();
+      // document.getElementById("game-overlay").classList.add("hide-element");
+      selectDifficulty();
       break;
     case "return-to-game":
       returnButtonToOriginal();
@@ -112,4 +114,15 @@ function returnButtonToOriginal() {
     button.id = "how-to-play";
     button.innerHTML = "How To Play";
   }
+}
+
+function selectDifficulty() {
+  document.getElementById(
+    "game-overlay"
+  ).innerHTML = `<div id="difficulty-buttons">
+                            <h2 class="difficulty-level" id="difficulty-selector">Select your difficulty</h2>
+                            <button id="easy" class="difficulty-level">Easy</button>
+                            <button id="medium" class="difficulty-level">Medium</button>
+                            <button id="hard" class="difficulty-level">Hard</button>
+                            </div>`;
 }

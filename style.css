@@ -38,6 +38,18 @@ button {
   cursor: pointer;
 }
 
+.difficulty-level {
+  margin: 5px 0 5px 0;
+}
+
+#difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+}
+
 .game-space {
   outline: solid 0.5px #7a7a7a;
   width: 25px;
@@ -116,15 +128,15 @@ button {
   justify-content: space-between;
 }
 
-#game-overlay.hide-element {
+#game-overlay .hide-element {
   display: none;
 }
 
-#game-overlay.show-element {
-  display: none;
+#game-overlay .show-element {
+  display: block;
 }
 
-#game-overlay button {
+#play {
   margin-top: 232px;
 }
 
@@ -163,15 +175,24 @@ button {
   border: 1px solid rgb(118, 118, 118);
   background-color: rgb(239, 239, 239);
   color: #284b63;
-  font-family: "Bungee", cursive;
-  font-size: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
 
+h2 {
+  font-family: "Bungee", cursive;
+  font-size: 25px;
+}
+
+#difficulty-selector {
+  color: #284b63;
+  background-color: rgb(239, 239, 239);
+}
+
 #current-score {
+  font-family: "Bungee", cursive;
   font-size: 40px;
 }
 
