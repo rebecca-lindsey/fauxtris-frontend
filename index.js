@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  //   Gameplay.createNewBoard();
   document
     .getElementById("game-display")
     .addEventListener("keydown", function (event) {
@@ -41,10 +40,10 @@ function handleClick(id) {
 function fetchLeaderboard() {
   fetch("http://127.0.0.1:3000/difficulty.json")
     .then((response) => response.json())
-    .then((data) => displayScores(data));
+    .then((data) => displayHighScores(data));
 }
 
-function displayScores(scoreObj) {
+function displayHighScores(scoreObj) {
   if (Gameplay.currentGame) {
     Gameplay.currentGame.stopGame();
   }

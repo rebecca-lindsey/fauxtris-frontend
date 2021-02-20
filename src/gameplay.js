@@ -215,5 +215,10 @@ class Gameplay {
 
   addToScore() {
     this.score += 10;
+    this.displayCurrentScore();
+  }
+
+  displayCurrentScore() {
+    document.getElementById("current-score").innerHTML = this.score;
   }
 }
