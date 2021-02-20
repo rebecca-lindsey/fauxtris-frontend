@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("game-display")
-    .addEventListener("keydown", function (event) {
-      Gameplay.currentGame.handleArrowKey(event.key);
-    });
+  document.addEventListener("keydown", function (event) {
+    Gameplay.currentGame.handleArrowKey(event.key);
+  });
 
   document
     .getElementById("horizontal-content")

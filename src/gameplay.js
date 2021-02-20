@@ -45,10 +45,12 @@ class Gameplay {
 
   stopGame() {
     clearInterval(Tetromino.blockFallInterval);
+    this.freeze = true;
   }
 
   continueGame() {
     Tetromino.activeTetromino.blockFall();
+    this.freeze = false;
   }
 
   displayLastBlock() {
