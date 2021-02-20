@@ -9,22 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("horizontal-content")
     .addEventListener("click", function (event) {
-      handleClick(event);
+      handleClick(event.target.id);
     });
 });
 
-function handleClick(event) {
-  switch (event.target.id) {
+function handleClick(id) {
+  switch (id) {
     case "new-game":
       new Gameplay();
       document.getElementById("game-overlay").classList.add("hide-element");
       break;
-    case "instructions":
-      console.log("instructions");
-      changeButtonToGame(event.target.id);
+    case "how-to-play":
+      changeButtonToGame(id);
+      displayHowToPlay();
       break;
     case "leaderboard":
-      changeButtonToGame(event.target.id);
+      changeButtonToGame(id);
       fetchLeaderboard();
       break;
     case "play":
@@ -32,7 +32,7 @@ function handleClick(event) {
       document.getElementById("game-overlay").classList.add("hide-element");
       break;
     case "return-to-game":
-      returnButtonToOriginal(event.target.id);
+      returnButtonToOriginal(id);
       returnToGame();
       break;
   }
@@ -65,6 +65,27 @@ function displayScores(scoreObj) {
   }
 }
 
+function displayHowToPlay() {
+  if (Gameplay.currentGame) {
+    Gameplay.currentGame.stopGame();
+  }
+  const overlayDiv = document.getElementById("game-overlay");
+  overlayDiv.classList.remove("hide-element");
+  overlayDiv.innerHTML = `<div id="how-to-play-text">
+                              <p>Blocks are falling from the sky!
+                              <br>If they touch the top, you lose.
+                              <br>Clear blocks by filling in rows.
+                              <br>How many rows can you clear?</p>
+                              <ul>
+                                <li>Right Arrow Key - Move right</li>
+                                <li>Left Arrow Key - Move left</li>
+                                <li>Down Arrow Key - Move down</li>
+                                <li>Spacebar - Rotate
+                                <br>(Blocks have 0, 2, or 4 rotations) </li>
+                              </ul>
+                            </div>`;
+}
+
 function returnToGame() {
   document.getElementById("game-overlay").classList.add("hide-element");
   Gameplay.currentGame.continueGame();
@@ -81,11 +102,11 @@ function changeButtonToGame(id) {
 function returnButtonToOriginal(btnId) {
   const button = document.getElementById(btnId);
   const buttonArray = [...document.getElementById("side-navigation").children];
-  if (buttonArray.find((name) => name.id === "instructions")) {
+  if (buttonArray.find((name) => name.id === "how-to-play")) {
     button.id = "leaderboard";
     button.innerHTML = "Leaderboard";
   } else if (buttonArray.find((name) => name.id === "leaderboard")) {
-    button.id = "instructions";
-    button.innerHTML = "Instructions";
+    button.id = "how-to-play";
+    button.innerHTML = "How To Play";
   }
 }

@@ -109,7 +109,6 @@ class Gameplay {
   }
 
   moveActivePiece(direction) {
-    console.log("moveActivePiece");
     const activeBlocks = Tetromino.activeTetromino.activeBlocks;
     const keys = Object.keys(activeBlocks);
     const activeTetromino = Tetromino.activeTetromino;
@@ -133,7 +132,6 @@ class Gameplay {
   }
 
   validMove(blocksToAdd) {
-    console.log("Valid move");
     let boolean = true;
     for (const [row, indexes] of Object.entries(blocksToAdd)) {
       if (row === "invalidRow") {
@@ -150,7 +148,6 @@ class Gameplay {
   }
 
   checkForClearedRow() {
-    console.log("checkForClearedRow");
     let keys = Object.keys(Tetromino.activeTetromino.activeBlocks);
     let boolean = false;
     for (const row of keys) {
@@ -162,7 +159,6 @@ class Gameplay {
   }
 
   rowClear() {
-    console.log("rowClear");
     let keys = Object.keys(Tetromino.activeTetromino.activeBlocks);
     for (const row of keys) {
       if (this.board[row].every((element) => element != null)) {
@@ -181,8 +177,6 @@ class Gameplay {
   }
 
   rowDrop(rowsToRemove = []) {
-    console.log("rowDrop");
-    console.log("Rows to Remove: ", rowsToRemove);
     this.addToScore();
 
     const keyArray = Object.keys(this.board).sort();
@@ -211,7 +205,6 @@ class Gameplay {
   }
 
   checkForLoss(blocksToRemove) {
-    console.log("checkForLoss");
     if (blocksToRemove.hasOwnProperty("tRow")) {
       this.gameover();
       return true;
@@ -221,7 +214,6 @@ class Gameplay {
   }
 
   addToScore() {
-    console.log("addToScore");
     this.score += 10;
   }
 }

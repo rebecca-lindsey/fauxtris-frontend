@@ -105,6 +105,7 @@ button {
 #game-overlay {
   position: absolute;
   background: rgb(53, 53, 53);
+  color: #fffafa;
   width: 260px;
   height: 510px;
   z-index: 10;
@@ -119,6 +120,10 @@ button {
   display: none;
 }
 
+#game-overlay.show-element {
+  display: none;
+}
+
 #game-overlay button {
   position: fixed;
   top: 50%;
@@ -127,7 +132,6 @@ button {
 }
 
 #game-overlay div {
-  color: #fffafa;
   padding: 5px 0 5px 0;
 }
 
@@ -142,6 +146,18 @@ button {
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
+}
+
+#how-to-play-text p {
+  padding: 5px 5px 10px 5px;
+}
+
+#how-to-play-text li {
+  padding: 5px 5px 10px 5px;
+}
+
+#how-to-play-text br {
+  height: 5px;
 }
 
 #score {
