@@ -29,7 +29,8 @@ nav {
   width: 250px;
 }
 
-button {
+button,
+input[type="submit"] {
   font-family: "Bungee", cursive;
   font-size: 25px;
   color: #284b63;
@@ -44,9 +45,13 @@ input[type="text"] {
   border: 0;
   outline: 0;
   background: transparent;
-  border-bottom: 1px solid black;
+  border-bottom: 1px dashed #fffafa;
   color: #fffafa;
   align-self: center;
+}
+
+form {
+  margin-top: 150px;
 }
 
 .difficulty-level {
@@ -131,6 +136,11 @@ input[type="text"] {
   width: 260px;
   height: 510px;
   z-index: 10;
+}
+
+#new-high-score {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .hide-element {

@@ -261,17 +261,19 @@ class Gameplay {
     const gameOverlay = document.getElementById("game-overlay");
     gameOverlay.innerHTML = `<div id="new-high-score">
     <h2>New High Score!</h2>
-    <input id="initial-input" type="text" name="initials" maxlength="3" size="4" pattern="[a-zA-Z]"></input>
+    <form action="" method="post">
+    <input id="initials" type="text" name="initials" maxlength="3" size="4" pattern="[a-zA-Z]">
+    <p>Please enter your initials above</p>
+    <input type="submit" value="Save your score">
+    </form>
     </div>`;
 
-    document
-      .getElementById("initial-input")
-      .addEventListener("keydown", (event) => {
-        if (event.key.match(/[a-zA-Z]+/g)) {
-          return event;
-        } else {
-          event.preventDefault();
-        }
-      });
+    document.getElementById("initials").addEventListener("keydown", (event) => {
+      if (event.key.match(/[a-zA-Z]+/g)) {
+        return event;
+      } else {
+        event.preventDefault();
+      }
+    });
   }
 }
