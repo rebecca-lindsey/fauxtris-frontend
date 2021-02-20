@@ -229,7 +229,7 @@ class Gameplay {
     clearContentAndAddFlex();
     const gameOverlay = document.getElementById("game-overlay");
     gameOverlay.classList.add("transparent-background");
-    gameOverlay.innerHTML = `<h2>Gameover!</h2>`;
+    // gameOverlay.innerHTML = `<h2>Gameover!</h2>`;
     this.handleScore();
   }
 
@@ -241,9 +241,10 @@ class Gameplay {
       (score) => parseInt(score) < this.score
     );
     if (lowerScore) {
+      this.displaySuccess();
       this.addNewHighScore(difficultyLevel, lowerScore);
     } else {
-      showLowScore();
+      this.showLowScore();
     }
   }
 
@@ -254,5 +255,23 @@ class Gameplay {
     const scoreToRemove = difficultyLevel.scores.pop();
     displayHighScores(difficultyLevel);
     difficultyLevel.updateDatabase(input, scoreToRemove);
+  }
+
+  displaySuccess() {
+    const gameOverlay = document.getElementById("game-overlay");
+    gameOverlay.innerHTML = `<div id="new-high-score">
+    <h2>New High Score!</h2>
+    <input id="initial-input" type="text" name="initials" maxlength="3" size="4" pattern="[a-zA-Z]"></input>
+    </div>`;
+
+    document
+      .getElementById("initial-input")
+      .addEventListener("keydown", (event) => {
+        if (event.key.match(/[a-zA-Z]+/g)) {
+          return event;
+        } else {
+          event.preventDefault();
+        }
+      });
   }
 }
