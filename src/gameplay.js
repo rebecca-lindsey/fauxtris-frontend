@@ -276,4 +276,9 @@ class Gameplay {
       }
     });
   }
+
+  displayLoss() {
+    const gameOverlay = document.getElementById("game-overlay");
+    gameOverlay.innerHTML = `<h2>Gameover!</h2>`;
+  }
 }
