@@ -140,9 +140,12 @@ form {
 
 #new-high-score {
   position: absolute;
+  width: 260px;
+  height: 510px;
   text-align: center;
   color: #fffafa;
   z-index: 10;
+  justify-content: center;
 }
 
 .hide-element {

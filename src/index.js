@@ -138,7 +138,7 @@ function preventDuplicateButtons(previousBtnClicked, idOfCurrentBtn) {
     previousBtnClicked.innerHTML = "Leaderboard";
   } else if (idOfCurrentBtn === "leaderboard") {
     previousBtnClicked.id = "how-to-play";
-    previousBtnClicked.innerHTML = "how-to-play";
+    previousBtnClicked.innerHTML = "How To Play";
   }
 }
 

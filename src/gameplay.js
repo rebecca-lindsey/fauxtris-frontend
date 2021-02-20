@@ -269,7 +269,9 @@ class Gameplay {
 
   displaySuccess() {
     document.getElementById("new-high-score").classList.remove("hide-element");
-    document.getElementById("new-high-score").classList.add("show-element");
+    document
+      .getElementById("new-high-score")
+      .classList.add("show-flex-element");
 
     document.getElementById("initials").addEventListener("keydown", (event) => {
       if (event.key.match(/[a-zA-Z]+/g)) {
