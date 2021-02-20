@@ -7,6 +7,7 @@ class Gameplay {
     Gameplay.currentGame = this;
     this.createNewBoard();
     this.generateNewBlock();
+    this.displayCurrentScore();
   }
 
   static currentGame;
@@ -57,10 +58,10 @@ class Gameplay {
   displayLastBlock() {
     for (const row in Tetromino.activeTetromino.activeBlocks) {
       Tetromino.activeTetromino.activeBlocks[row].forEach((index) => {
-        Gameplay.currentGame.board[row][index] = "losingBlock";
+        this.board[row][index] = "losingBlock";
       });
     }
-    Gameplay.currentGame.populateBoard();
+    this.populateBoard();
   }
 
   generateNewBlock() {
