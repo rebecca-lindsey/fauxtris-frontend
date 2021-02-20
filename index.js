@@ -35,16 +35,15 @@ function handleClick(id) {
       break;
     case "easy":
       new Gameplay("Easy");
-      document.getElementById("game-overlay").style.display = "none";
-      document.getElementById("game-overlay").innerHTML = "";
+      clearContentAndRemoveFlex();
       break;
     case "medium":
       new Gameplay("Medium");
-      document.getElementById("game-overlay").classList.add("hide-element");
+      clearContentAndRemoveFlex();
       break;
     case "hard":
       new Gameplay("Hard");
-      document.getElementById("game-overlay").classList.add("hide-element");
+      clearContentAndRemoveFlex();
       break;
   }
 }
@@ -55,13 +54,25 @@ function fetchLeaderboard() {
     .then((data) => displayHighScores(data));
 }
 
+function clearContentAndRemoveFlex() {
+  document.getElementById("game-overlay").classList.remove("show-flex-element");
+  document.getElementById("game-overlay").classList.add("hide-element");
+  document.getElementById("game-overlay").innerHTML = "";
+}
+
+function clearContentAndAddFlex() {
+  document.getElementById("game-overlay").classList.add("show-flex-element");
+  document.getElementById("game-overlay").classList.remove("hide-element");
+  document.getElementById("game-overlay").innerHTML = "";
+}
+
 function displayHighScores(scoreObj) {
   if (Gameplay.currentGame) {
     Gameplay.currentGame.stopGame();
   }
-  const overlayDiv = document.getElementById("game-overlay");
-  overlayDiv.style.display = "flex";
-  overlayDiv.innerHTML = "";
+
+  clearContentAndAddFlex();
+
   for (const difficulty of scoreObj) {
     const div = document.createElement("div");
     div.innerHTML = `<p class="list-header">${difficulty.level}</p>`;
@@ -72,7 +83,7 @@ function displayHighScores(scoreObj) {
       ul.append(li);
     }
     div.append(ul);
-    overlayDiv.append(div);
+    document.getElementById("game-overlay").append(div);
   }
 }
 
@@ -80,9 +91,11 @@ function displayHowToPlay() {
   if (Gameplay.currentGame) {
     Gameplay.currentGame.stopGame();
   }
-  const overlayDiv = document.getElementById("game-overlay");
-  overlayDiv.style.display = "flex";
-  overlayDiv.innerHTML = `<div id="how-to-play-text">
+  clearContentAndAddFlex();
+
+  document.getElementById(
+    "game-overlay"
+  ).innerHTML = `<div id="how-to-play-text">
                               <p>Blocks are falling from the sky!
                               <br>If they touch the top, you lose.
                               <br>Clear blocks by filling in rows.
@@ -98,15 +111,29 @@ function displayHowToPlay() {
 }
 
 function returnToGame() {
-  document.getElementById("game-overlay").classList.add("hide-element");
+  clearContentAndRemoveFlex();
   Gameplay.currentGame.continueGame();
 }
 
 function changeButtonToGame(id) {
+  const previousBtnClicked = document.getElementById("return-to-game");
+  if (previousBtnClicked) {
+    preventDuplicateButtons(previousBtnClicked, id);
+  }
   if (Gameplay.currentGame) {
     const button = document.getElementById(id);
     button.id = "return-to-game";
     button.innerHTML = "Return to Game";
+  }
+}
+
+function preventDuplicateButtons(previousBtnClicked, idOfCurrentBtn) {
+  if (idOfCurrentBtn === "how-to-play") {
+    previousBtnClicked.id = "leaderboard";
+    previousBtnClicked.innerHTML = "Leaderboard";
+  } else if (idOfCurrentBtn === "leaderboard") {
+    previousBtnClicked.id = "how-to-play";
+    previousBtnClicked.innerHTML = "how-to-play";
   }
 }
 
@@ -126,6 +153,7 @@ function returnButtonToOriginal() {
 }
 
 function selectDifficulty() {
+  clearContentAndAddFlex();
   document.getElementById(
     "game-overlay"
   ).innerHTML = `<div id="difficulty-buttons">

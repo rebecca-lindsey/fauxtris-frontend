@@ -121,6 +121,13 @@ button {
   width: 260px;
   height: 510px;
   z-index: 10;
+}
+
+.hide-element {
+  display: none;
+}
+
+.show-flex-element {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -128,11 +135,7 @@ button {
   justify-content: space-between;
 }
 
-#game-overlay .hide-element {
-  display: none;
-}
-
-#game-overlay .show-element {
+.show-element {
   display: block;
 }
 
