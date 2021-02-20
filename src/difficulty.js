@@ -8,25 +8,25 @@ class Difficulty {
 
   static allDifficulties = [];
 
-  updateDatabase(scoreToAdd, scoreToRemove) {
-    debugger;
+  updateDatabase(score, initials, scoreToRemove) {
+    this.addNewScoreToDatabase(score, initials);
   }
 
-  addNewScoreToDatabase(scoreToAdd) {
-    // let configObj = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     points: e.target.children[0].querySelector("input").value,
-    //     initials: e.target.children[1].querySelector("input").value,
-    //     difficulty_id: e.target.children[2].querySelector("input").value,
-    //   }),
-    // };
-    // fetch(url, configObj)
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
+  addNewScoreToDatabase(score, initials) {
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        points: score,
+        initials: initials,
+        difficulty_id: this.id,
+      }),
+    };
+    fetch("http://127.0.0.1:3000/score", configObj)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }
 }

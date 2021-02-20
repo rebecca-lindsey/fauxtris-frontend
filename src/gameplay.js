@@ -229,7 +229,6 @@ class Gameplay {
     clearContentAndAddFlex();
     const gameOverlay = document.getElementById("game-overlay");
     gameOverlay.classList.add("transparent-background");
-    // gameOverlay.innerHTML = `<h2>Gameover!</h2>`;
     this.handleScore();
   }
 
@@ -242,29 +241,36 @@ class Gameplay {
     );
     if (lowerScore) {
       this.displaySuccess();
-      this.addNewHighScore(difficultyLevel, lowerScore);
     } else {
-      this.showLowScore();
+      this.displayLoss();
     }
   }
 
-  addNewHighScore(difficultyLevel, lowerScore) {
+  addNewHighScore(initials) {
+    const difficultyLevel = Difficulty.allDifficulties.find(
+      (difficulty) => difficulty.level === this.difficulty
+    );
+    const lowerScore = difficultyLevel.scores.find(
+      (score) => parseInt(score) < this.score
+    );
     const index = difficultyLevel.scores.indexOf(lowerScore);
-    const input = `${this.score} - ${this.initials}`;
+    const input = `${this.score} - ${initials}`;
     difficultyLevel.scores.splice(index, 0, input);
     const scoreToRemove = difficultyLevel.scores.pop();
     displayHighScores(difficultyLevel);
-    difficultyLevel.updateDatabase(input, scoreToRemove);
+    difficultyLevel.updateDatabase(this.score, initials, scoreToRemove);
   }
 
   displaySuccess() {
     const gameOverlay = document.getElementById("game-overlay");
+    gameOverlay.classList.add("display-flex-element");
+    gameOverlay.classList.add("transparent-background");
     gameOverlay.innerHTML = `<div id="new-high-score">
     <h2>New High Score!</h2>
     <form action="" method="post">
     <input id="initials" type="text" name="initials" maxlength="3" size="4" pattern="[a-zA-Z]">
     <p>Please enter your initials above</p>
-    <input type="submit" value="Save your score">
+    <input type="submit" id="score-submit" value="Save your score">
     </form>
     </div>`;
 

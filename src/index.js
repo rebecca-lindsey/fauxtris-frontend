@@ -45,6 +45,9 @@ function handleClick(id) {
       new Gameplay("Hard");
       clearContentAndRemoveFlex();
       break;
+    case "score-submit":
+      const initials = document.getElementById("initials").value.toUpperCase();
+      Gameplay.currentGame.addNewHighScore(initials);
   }
 }
 
