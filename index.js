@@ -15,10 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function handleClick(id) {
   switch (id) {
     case "new-game":
-      // new Gameplay();
       returnButtonToOriginal();
       selectDifficulty();
-      // document.getElementById("game-overlay").classList.add("hide-element");
       break;
     case "how-to-play":
       changeButtonToGame(id);
@@ -29,13 +27,24 @@ function handleClick(id) {
       fetchLeaderboard();
       break;
     case "play":
-      // new Gameplay();
-      // document.getElementById("game-overlay").classList.add("hide-element");
       selectDifficulty();
       break;
     case "return-to-game":
       returnButtonToOriginal();
       returnToGame();
+      break;
+    case "easy":
+      new Gameplay("Easy");
+      document.getElementById("game-overlay").style.display = "none";
+      document.getElementById("game-overlay").innerHTML = "";
+      break;
+    case "medium":
+      new Gameplay("Medium");
+      document.getElementById("game-overlay").classList.add("hide-element");
+      break;
+    case "hard":
+      new Gameplay("Hard");
+      document.getElementById("game-overlay").classList.add("hide-element");
       break;
   }
 }
@@ -51,7 +60,7 @@ function displayHighScores(scoreObj) {
     Gameplay.currentGame.stopGame();
   }
   const overlayDiv = document.getElementById("game-overlay");
-  overlayDiv.classList.remove("hide-element");
+  overlayDiv.style.display = "flex";
   overlayDiv.innerHTML = "";
   for (const difficulty of scoreObj) {
     const div = document.createElement("div");
@@ -72,7 +81,7 @@ function displayHowToPlay() {
     Gameplay.currentGame.stopGame();
   }
   const overlayDiv = document.getElementById("game-overlay");
-  overlayDiv.classList.remove("hide-element");
+  overlayDiv.style.display = "flex";
   overlayDiv.innerHTML = `<div id="how-to-play-text">
                               <p>Blocks are falling from the sky!
                               <br>If they touch the top, you lose.
