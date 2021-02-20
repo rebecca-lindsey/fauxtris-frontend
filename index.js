@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", function (event) {
       handleClick(event.target.id);
     });
+
+  fetchLeaderboard();
 });
 
 function handleClick(id) {

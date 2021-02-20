@@ -232,4 +232,6 @@ class Gameplay {
     gameOverlay.innerHTML = `<h2>Gameover!</h2>`;
     checkForHighScore();
   }
+
+  checkForHighScore() {}
 }
