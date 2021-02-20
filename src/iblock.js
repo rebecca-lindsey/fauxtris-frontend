@@ -4,8 +4,6 @@ class iBlock extends TwoRotation {
     this.activeBlocks = this.populateIBlock();
   }
 
-  // TODO: Fix iBlock rotation so that it doesn't break in the top rows
-
   populateIBlock() {
     const blocksToAdd = {};
     const firstRowName = Object.keys(Gameplay.currentGame.board)[0];
@@ -31,7 +29,9 @@ class iBlock extends TwoRotation {
 
     const blocksToRemove = {};
     const blocksToAdd = {};
-
+    if (currentRowName === "tRow" || currentRowName === "sRow") {
+      return;
+    }
     for (let i = firstIndex; i <= lastIndex; i++) {
       if (i != verticalIndex) {
         if (blocksToRemove.hasOwnProperty(currentRowName)) {
