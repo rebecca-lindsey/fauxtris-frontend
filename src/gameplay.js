@@ -257,7 +257,12 @@ class Gameplay {
     const input = `${this.score} - ${initials}`;
     difficultyLevel.scores.splice(index, 0, input);
     const scoreToRemove = difficultyLevel.scores.pop();
-    difficultyLevel.updateDatabase(this.score, initials, scoreToRemove);
+    const scoreToAdd = {
+      points: this.score,
+      initials: initials,
+      difficulty_id: difficultyLevel.id,
+    };
+    ScoreApi.updateDatabase(scoreToAdd, scoreToRemove);
     alert("Your score has been saved!");
   }
 

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       handleClick(event.target.id);
     });
 
-  fetchLeaderboard();
+  DifficultyApi.fetchLeaderboard();
 });
 
 function handleClick(id) {
@@ -49,12 +49,6 @@ function handleClick(id) {
       const initials = document.getElementById("initials").value.toUpperCase();
       Gameplay.currentGame.addNewHighScore(initials);
   }
-}
-
-function fetchLeaderboard() {
-  fetch("http://127.0.0.1:3000/difficulty.json")
-    .then((response) => response.json())
-    .then((data) => createDifficultyScores(data));
 }
 
 function createDifficultyScores(scoreObj) {

@@ -1,35 +1,28 @@
 class ScoreApi {
-  constructor() {
-    this.baseUrl = "http://127.0.0.1:3000/score";
-  }
-
-  updateDatabase(newScore, newInitials, scoreToRemove) {
-    this.removeScoreFromDatabase(scoreToRemove);
+  static updateDatabase(scoreToAdd, scoreToRemove) {
+    ScoreApi.removeScoreFromDatabase(scoreToRemove);
     setTimeout(() => {
-      this.addNewScoreToDatabase(newScore, newInitials);
+      ScoreApi.addNewScoreToDatabase(scoreToAdd);
     }, 200);
   }
 
-  addNewScoreToDatabase(score, initials) {
+  static addNewScoreToDatabase(scoreToAdd) {
+    debugger;
     let configObj = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({
-        points: score,
-        initials: initials,
-        difficulty_id: this.id,
-      }),
+      body: JSON.stringify(scoreToAdd),
     };
 
-    fetch(this.baseUrl, configObj)
+    fetch("http://127.0.0.1:3000/score", configObj)
       .then((response) => response.json())
       .then((data) => console.log(data));
   }
 
-  removeScoreFromDatabase(scoreToRemove) {
+  static removeScoreFromDatabase(scoreToRemove) {
     const configObj = {
       method: "DELETE",
       headers: {
@@ -38,6 +31,6 @@ class ScoreApi {
       },
     };
 
-    fetch(`${this.baseUrl}${scoreToRemove.id}`, configObj);
+    fetch(`http://127.0.0.1:3000/score/${scoreToRemove.id}`, configObj);
   }
 }
