@@ -61,6 +61,8 @@ open index.html
   - Left Arrow - Moves Tetromino to the left
   - Right Arrow - Moves Tetromino to the right
   - Down Arrow - Moves Tetromino more quickly downwards
+  - Spacebar - Rotates the Tetromino
+    - Depending on the Tetromino, it may rotate 0, 2, or 4 times!
 - There is no winning the game - just seeing how long you can keep it up! If your game ends with a new top score, you will be offered a space to input your initials to be saved alongside your score in the game for future players to admire
 
 ## License
