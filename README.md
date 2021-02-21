@@ -1,6 +1,6 @@
 # Fauxtris
 
-Frontend file, view backend here(https://github.com/rebeccahickson/fauxtris-backend)
+Frontend file, view backend [here](https://github.com/rebeccahickson/fauxtris-backend)
 
 Fauxtris is a single page JavaScript application, using Rails as an API, that emulates the popular game Tetris.
 
